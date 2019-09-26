@@ -1,25 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Tabs type="card" @on-click="click">
+      <TabPane label="系统" name="system"></TabPane>
+      <TabPane label="功能" name="func">功能</TabPane>
+      <TabPane label="展示" name="exhibition">展示</TabPane>
+      <Button @click="save" icon="ios-download-outline" type="primary" slot="extra">保存</Button>
+    </Tabs>
     <router-view/>
   </div>
 </template>
-<style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
+<script>
+    export default {
+        data () {
+            return {};
+        },
+        methods: {
+            click (name) {
+                location.hash = '#/' + name;
+            },
+            save(){
+                alert('save')
+            }
+        }
+    }
+</script>
 
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+<style>
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  .ivu-tabs{
+    height: 36px;
+  }
 </style>
