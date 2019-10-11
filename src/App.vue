@@ -7,7 +7,7 @@
       </template>
       <Button @click="save" icon="ios-download-outline" type="primary" slot="extra">保存</Button>
     </Tabs>
-    <Tabs class="tab" @on-click="change" :name="curTab">
+    <Tabs class="tab" @on-click="change" :name="curTab" ref="tabs">
       <template v-for="item in curTabData">
         <TabPane :label="item.caption" :name="item.name" :tab="curTab">
           <template v-if="item.name=='basic'">
@@ -95,9 +95,9 @@
         this.curTabData = this.data[index].children;
         this.curTab = this.curTabData.name;
         this.current = this.curTabData[0].name;
+        this.$refs.tabs.activeKey = this.current;//激活第1个tab页
       },
       change(name: string) {
-        // console.log(name);
         this.$store.commit(types.SET_CURRENT_TAB, name);
       },
       save() {
@@ -109,7 +109,7 @@
     },
     mounted() {
       this.changeCurDataByIndex(0);
-      this.$store.commit(types.SET_CURRENT_TAB, this.current);
+      this.change(this.current);
     }
   }
 </script>
