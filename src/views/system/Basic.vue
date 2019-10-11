@@ -90,7 +90,7 @@
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .btns {
-    width: 221px;
+    width: 250px;
   }
 
   .btn {

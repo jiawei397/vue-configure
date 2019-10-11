@@ -1,5 +1,5 @@
 <template>
-  <Tabs class="tab">
+  <Tabs class="tab" @click="change" name="system">
     <TabPane label="基本" name="a" tab="system">
       <basic></basic>
     </TabPane>
@@ -15,12 +15,18 @@
     components: {
       Basic,
     },
+    methods: {
+      change(name: string) {
+        debugger
+        console.log(name);
+      }
+    }
   };
 </script>
 
 <style>
   /*.tab {*/
-    /*width: 100%;*/
-    /*height: 100%;*/
+  /*width: 100%;*/
+  /*height: 100%;*/
   /*}*/
 </style>
