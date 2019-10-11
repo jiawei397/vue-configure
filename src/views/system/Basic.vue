@@ -52,24 +52,14 @@ export default {
           defaultValue: true,
         }],
       formItem: {
-        input: '',
-        select: '',
-        radio: 'male',
-        checkbox: [],
-        isDebug: true,
-        isShowAlert: false,
-        date: '',
-        time: '',
-        slider: [20, 50],
-        textarea: '',
         labelWidth: 250,
       },
     };
   },
   methods: {
-    change(status) {
-      this.$Message.info('开关状态：' + status);
-    },
+    // change(status) {
+    //   this.$Message.info('开关状态：' + status);
+    // },
   },
 };
 </script>
