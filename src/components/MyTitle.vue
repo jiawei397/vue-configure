@@ -6,14 +6,14 @@
 </template>
 
 <script lang="ts">
-  import {Component, Prop, Vue} from 'vue-property-decorator';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 
-  @Component
-  export default class Title extends Vue {
-    @Prop() private vStyle: string; //style是关键字
-    @Prop() private caption: string;
-    @Prop() private name: string;
-  }
+@Component
+export default class MyTitle extends Vue {
+  @Prop() private vStyle: string; // style是关键字
+  @Prop() private caption: string;
+  @Prop() private name: string;
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

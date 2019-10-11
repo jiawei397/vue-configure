@@ -10,7 +10,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Switch extends Vue {
+export default class MySwitch extends Vue {
   @Prop() private caption: string;
   @Prop() private val: string;
   @Prop() private name: string;
