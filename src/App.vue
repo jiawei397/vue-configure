@@ -10,7 +10,6 @@
   </div>
 </template>
 <script>
-  import {mapMutations} from 'vuex';
   import {types} from "./store";
 
   export default {
@@ -22,10 +21,11 @@
         location.hash = '#/' + name;
       },
       save () {
-        this[types.SAVE]({name:'jw',val:123});
+        // this[types.SAVE]({name:'jw',val:123});
         // this.$store.commit(types.SAVE, {name:'jw',val:123});
+        this.$store.dispatch(types.SAVE);
       },
-      ...mapMutations([types.SAVE])
+      // ...mapMutations([types.SAVE])
     }
   }
 </script>
