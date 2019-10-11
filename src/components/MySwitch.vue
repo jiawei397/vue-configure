@@ -1,6 +1,6 @@
 <template>
-  <FormItem class="form-item" :label="caption">
-    <i-switch class="switch" :name="name" v-model="val" size="large">
+  <FormItem class="form-item my-form-item" :label="props.caption">
+    <i-switch class="switch" :prop="props.name" v-model="props.defaultValue" size="large">
     </i-switch>
   </FormItem>
 
@@ -11,15 +11,14 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class MySwitch extends Vue {
-  @Prop() private caption: string;
-  @Prop() private val: string;
-  @Prop() private name: string;
+  @Prop() private props: object;
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-  .switch {
-    margin-left -1050px
+  .my-form-item{
+    margin-left 20px
+    width 400px
   }
 </style>

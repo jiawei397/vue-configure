@@ -7,13 +7,14 @@
     <Form ref="basicForm" :model="basicForm" :rules="basicForm" :label-width="labelWidth" class="config-system" label-position="left">
       <ul v-for="item in data">
         <template v-if="item.type==='title'">
-          <MyTitle :name="item.caption" :vStyle="item.style" :caption="item.caption"></MyTitle>
+          <MyTitle :vStyle="item.style" :caption="item.caption"></MyTitle>
         </template>
         <template v-else-if="item.type==='bool'">
-          <FormItem class="form-item my-form-item" :label="item.caption">
-            <i-switch class="switch" :prop="item.name" v-model="item.defaultValue" size="large">
-            </i-switch>
-          </FormItem>
+          <!--<FormItem class="form-item my-form-item" :label="item.caption">-->
+            <!--<i-switch class="switch" :prop="item.name" v-model="item.defaultValue" size="large">-->
+            <!--</i-switch>-->
+          <!--</FormItem>-->
+          <MySwitch :props="item"></MySwitch>
         </template>
       </ul>
       <FormItem>
@@ -25,13 +26,13 @@
 </template>
 <script lang="ts">
   import MyTitle from '@/components/MyTitle.vue';
-  // import MySwitch from '@/components/MySwitch.vue';
+  import MySwitch from '@/components/MySwitch.vue';
 
   export default {
     name: 'basic',
     components: {
       MyTitle,
-      // MySwitch,
+      MySwitch,
     },
     data() {
       const data = [
@@ -99,10 +100,4 @@
   .config-system {
     margin-top 20px
   }
-
-  .my-form-item{
-    margin-left 20px
-    width 400px
-  }
-
 </style>

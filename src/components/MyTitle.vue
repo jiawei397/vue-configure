@@ -1,5 +1,5 @@
 <template>
-  <div :class="'config-title ' + (vStyle==='title2' ? 'config-title2':'')" :name="name">
+  <div :class="'config-title ' + (vStyle==='title2' ? 'config-title2':'')">
     {{caption}}
   </div>
 
@@ -12,7 +12,6 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 export default class MyTitle extends Vue {
   @Prop() private vStyle: string; // style是关键字
   @Prop() private caption: string;
-  @Prop() private name: string;
 }
 </script>
 
