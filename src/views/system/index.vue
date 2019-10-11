@@ -8,17 +8,19 @@
   </Tabs>
 </template>
 <script lang="ts">
-import Basic from './Basic.vue';
-export default {
-  name: 'System',
-  components: {
-    Basic,
-  },
-};
+  import Basic from './Basic.vue';
+
+  export default {
+    name: 'System',
+    components: {
+      Basic,
+    },
+  };
 </script>
 
 <style>
-  .tab{
-    height: 100%;
-  }
+  /*.tab {*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+  /*}*/
 </style>

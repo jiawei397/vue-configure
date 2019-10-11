@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Tabs type="card" @on-click="click">
+    <Tabs class="tabs" type="card" @on-click="click">
       <TabPane label="系统" name="system"></TabPane>
       <TabPane label="功能" name="func">功能</TabPane>
       <TabPane label="展示" name="exhibition">展示</TabPane>
@@ -10,19 +10,19 @@
   </div>
 </template>
 <script>
-    export default {
-        data () {
-            return {};
-        },
-        methods: {
-            click (name) {
-                location.hash = '#/' + name;
-            },
-            save(){
-                alert('save')
-            }
-        }
+  export default {
+    data () {
+      return {};
+    },
+    methods: {
+      click (name) {
+        location.hash = '#/' + name;
+      },
+      save () {
+        alert('save')
+      }
     }
+  }
 </script>
 
 <style>
@@ -34,7 +34,7 @@
     color: #2c3e50;
   }
 
-  .ivu-tabs{
+  .tabs {
     height: 36px;
   }
 </style>
