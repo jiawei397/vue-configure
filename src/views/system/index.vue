@@ -1,50 +1,59 @@
 <template>
-  <Tabs class="tab" @on-click="change" name="system">
-    <TabPane label="基本" name="basic" tab="system">
-      <basic></basic>
-    </TabPane>
-    <TabPane label="资源" name="resource" tab="system"></TabPane>
-    <TabPane label="选择器" name="selector" tab="system"></TabPane>
+  <Tabs class="tab" @on-click="change" :name="tab">
+    <template v-for="item in data">
+      <TabPane :label="item.caption" :name="item.name" :tab="tab">
+        <template v-if="item.name=='basic'">
+          <basic></basic>
+        </template>
+        <template v-else>
+          {{item.caption}}
+        </template>
+      </TabPane>
+    </template>
   </Tabs>
 </template>
 <script lang="ts">
   import Basic from './Basic.vue';
   import {types} from "../../store";
 
-  // const data = {
-  //   'system':[{
-  //     name:'basic',
-  //     caption:'基本'
-  //   },{
-  //     name:'resource',
-  //     caption:'资源'
-  //   },{
-  //     name:'selector',
-  //     caption:'选择器'
-  //   },]
-  // };
-
   export default {
     name: 'System',
     components: {
       Basic,
     },
-    // data
+    data() {
+      const data = [{
+        name: 'basic',
+        caption: '基本'
+      }, {
+        name: 'resource',
+        caption: '资源'
+      }, {
+        name: 'selector',
+        caption: '选择器'
+      }];
+
+      return {
+        tab: 'system',
+        current: data[0].name,
+        data
+      }
+    },
     methods: {
       change(name: string) {
         // console.log(name);
         this.$store.commit(types.SET_CURRENT_TAB, name);
       }
     },
-    mounted(){
-      this.$store.commit(types.SET_CURRENT_TAB, 'basic');
+    mounted() {
+      this.$store.commit(types.SET_CURRENT_TAB, this.current);
     }
   };
 </script>
 
 <style>
-  /*.tab {*/
-  /*width: 100%;*/
-  /*height: 100%;*/
-  /*}*/
+  .content {
+    width: 100%;
+    /*margin-top: -20px;*/
+  }
 </style>
