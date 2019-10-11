@@ -1,11 +1,19 @@
 <template>
-  <div class="config-title config-title2">
-    <slot></slot>
+  <div :class="'config-title ' + (vStyle==='title2' ? 'config-title2':'')" :name="name">
+    {{caption}}
   </div>
 
 </template>
 
 <script lang="ts">
+  import {Component, Prop, Vue} from 'vue-property-decorator';
+
+  @Component
+  export default class Title extends Vue {
+    @Prop() private vStyle: string; //style是关键字
+    @Prop() private caption: string;
+    @Prop() private name: string;
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

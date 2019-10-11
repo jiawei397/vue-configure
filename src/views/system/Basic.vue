@@ -5,19 +5,15 @@
       <Button type="primary" icon="ios-search">下载配置</Button>
     </div>
     <Form ref="formItem" :model="formItem" :rules="formItem" :label-width="formItem.labelWidth" class="config-system">
-      <!--<div class="config-title config-title2">设定</div>-->
-      <!--<Title :msg="msg">{{msg}}</Title>-->
-      <Title>{{msg}}</Title>
-      <!--<FormItem class="form-item" label="开启前台调试模式">-->
-        <!--<i-switch class="switch" v-model="formItem.isDebug" size="large">-->
-        <!--</i-switch>-->
-      <!--</FormItem>-->
-      <MySwitch :name="isDebug.name" :caption="isDebug.caption" :val="isDebug.defaultValue"></MySwitch>
-      <MySwitch :name="isShowAlert.name" :caption="isShowAlert.caption" :val="isShowAlert.defaultValue"></MySwitch>
-      <!--<FormItem class="form-item" label="是否弹提示框">-->
-        <!--<i-switch class="switch" v-model="formItem.isShowAlert" size="large">-->
-        <!--</i-switch>-->
-      <!--</FormItem>-->
+      <ul v-for="item in data">
+        <template v-if="item.type==='title'">
+         <Title :name="item.caption" :vStyle="item.style" :caption="item.caption"></Title>
+        </template>
+        <template v-else-if="item.type==='bool'">
+          <MySwitch :name="item.name" :caption="item.caption"
+                    :val="item.defaultValue"></MySwitch>
+        </template>
+      </ul>
     </Form>
   </div>
 </template>
@@ -29,24 +25,12 @@
     name: 'basic',
     components: {
       Title,
-      MySwitch:Switch
+      MySwitch: Switch
     },
     data() {
       return {
-        msg:'设定',
-        isDebug:{
-          caption:'开启前台调试模式',
-          name:'isDebug',
-          type: 'bool',
-          defaultValue: true
-        },
-        isShowAlert:{
-          caption:'是否弹提示框',
-          name:'isShowAlert',
-          type: 'bool',
-          defaultValue: false
-        },
-        data: [{tab: 'others', type: 'title', style: 'title2', caption: '设定'},
+        data: [
+          {tab: 'others', type: 'title', style: 'title2', caption: '设定'},
           {//开启前台调试模式
             tab: 'others',
             group: '_system',
