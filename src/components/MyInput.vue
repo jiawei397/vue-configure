@@ -21,15 +21,4 @@ export default class MyInput extends Vue {
     margin-left 20px
     width 550px
   }
-
-  .input {
-    height: 30px;
-    width: 240px;
-    line-height: 30px;
-    background: #fff;
-    border: solid 1px #e5e5e5;
-    font-size: 12px;
-    padding-left: 10px;
-    border-radius: 2px
-  }
 </style>

@@ -13,6 +13,9 @@
           <template v-if="item.name=='basic'">
             <basic></basic>
           </template>
+          <template v-else-if="item.name=='resource'">
+            <resource></resource>
+          </template>
           <template v-else>
             {{item.caption}}
           </template>
@@ -24,6 +27,7 @@
 <script lang="ts">
   import {types} from "./enum";
   import Basic from './views/system/Basic.vue';
+  import Resource from './views/system/Resource.vue';
 
 
   export default {
@@ -81,6 +85,7 @@
     },
     components: {
       Basic,
+      Resource,
     },
     methods: {
       changeCurData(name) {
