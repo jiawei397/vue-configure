@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div class="resource">
     <Table stripe border :columns="columns7" :data="data6"></Table>
-    <Button class="btn" size="large" icon="ios-download-outline" type="primary">创建资源</Button>
+    <div class="btn">
+      <Button size="default" icon="ios-download-outline" type="primary">创建资源</Button>
+    </div>
   </div>
 </template>
 <script lang="ts">
   export default {
-    name:'resource',
-    data () {
+    name: 'resource',
+    data() {
       return {
         columns7: [
           {
@@ -103,13 +105,13 @@
       }
     },
     methods: {
-      show (index) {
+      show(index) {
         this.$Modal.info({
           title: 'User Info',
           content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
         })
       },
-      remove (index) {
+      remove(index) {
         this.data6.splice(index, 1);
       }
     }
@@ -117,7 +119,12 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-  .btn{
+  .resource {
     margin-left 20px
+  }
+
+  .btn {
+    float: left
+    margin-top 10px
   }
 </style>
