@@ -1,13 +1,4 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-
-Vue.use(Vuex);
-
-export const types = {
-  SAVE: 'SAVE',
-  SET_CURRENT_TAB: 'SET_CURRENT_TAB',
-  SET_CURRENT_DATA: 'SET_CURRENT_DATA',
-};
+import {types} from "@/enum";
 
 interface ISave {
   name: string
@@ -35,12 +26,13 @@ const actions = {
   }
 };
 
-export default new Vuex.Store({
+export default {
+  namespaced: true,
   state: {
     data: {},
     currentTab: '',//当前tab标签名称
     currentData: {}
   },
-  mutations: mutations,
-  actions,
-});
+  mutations,
+  actions
+}

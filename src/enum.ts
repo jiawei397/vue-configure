@@ -1,0 +1,5 @@
+export const types = {
+  SAVE: 'SAVE',
+  SET_CURRENT_TAB: 'SET_CURRENT_TAB',
+  SET_CURRENT_DATA: 'SET_CURRENT_DATA',
+};

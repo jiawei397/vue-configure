@@ -32,7 +32,7 @@
   import MyTitle from '@/components/MyTitle.vue';
   import MySwitch from '@/components/MySwitch.vue';
   import MyInput from '@/components/MyInput.vue';
-  import {types} from "../../store";
+  import {types} from "../../enum";
 
   export default {
     name: 'basic',

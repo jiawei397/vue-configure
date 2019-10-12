@@ -22,7 +22,7 @@
   </div>
 </template>
 <script lang="ts">
-  import {types} from "./store";
+  import {types} from "./enum";
   import Basic from './views/system/Basic.vue';
 
 
