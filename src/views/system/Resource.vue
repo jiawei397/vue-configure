@@ -1,17 +1,54 @@
 <template>
   <div class="resource">
-    <Table stripe border :columns="columns7" :data="data6"></Table>
+    <Table stripe border :columns="header" :data="data"></Table>
     <div class="btn">
-      <Button size="default" icon="ios-download-outline" type="primary">创建资源</Button>
+      <Button size="default" icon="ios-download-outline" type="primary" @click="modal10=true">创建资源</Button>
     </div>
+    <Modal
+      title="创建资源"
+      v-model="modal10"
+      class-name="vertical-center-modal" width="450px" :footer-hide="true">
+      <Form :model="formItem" :label-width="100" label-position="left">
+        <FormItem label="资源名称" class="form-item">
+          <Input v-model="formItem.name"></Input>
+        </FormItem>
+        <FormItem label="本地目录" class="form-item">
+          <Input v-model="formItem.local"></Input>
+        </FormItem>
+        <FormItem label="版本" class="form-item">
+          <Input v-model="formItem.version"></Input>
+        </FormItem>
+        <FormItem label="资源包" class="form-item">
+          <Upload
+            action="//jsonplaceholder.typicode.com/posts/"
+            :before-upload="handleUpload">
+            <Button icon="ios-cloud-upload-outline">选择文件</Button>
+          </Upload>
+          <span id="fileTitle" v-show="file">{{file.name}}</span>
+        </FormItem>
+      </Form>
+      <div class="btns">
+        <Button type="primary" @click="handleSubmit('formItem')">确定</Button>
+        <Button @click="cancel" style="margin-left: 8px">取消</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 <script>
+  import {upload} from "../../utils/ajax";
+
   export default {
     name: 'resource',
-    data() {
+    data () {
       return {
-        columns7: [
+        modal10: false,
+        file: {},
+        formItem: {
+          name: '',
+          local: '',
+          version: ''
+        },
+        header: [
           {
             title: '资源名称',
             key: 'name',
@@ -74,14 +111,12 @@
             }
           }
         ],
-        data6: [
+        data: [
           {
             name: 'John Brown',
-            age: 18,
             serverDir: 18,
             localDir: 18,
-            version: 1,
-            address: 'New York No. 1 Lake Park'
+            version: 1
           },
           {
             name: 'Jim Green',
@@ -105,14 +140,47 @@
       }
     },
     methods: {
-      show(index) {
+      show (index) {
         this.$Modal.info({
           title: 'User Info',
-          content: `Name：${this.data6[index].name}<br>Age：${this.data6[index].age}<br>Address：${this.data6[index].address}`
+          content: `Name：${this.data[index].name}<br>Age：${this.data[index].age}<br>Address：${this.data[index].address}`
         })
       },
-      remove(index) {
-        this.data6.splice(index, 1);
+      remove (index) {
+        this.data.splice(index, 1);
+      },
+      cancel () {
+        this.modal10 = false;
+      },
+      async handleSubmit () {
+        if (!this.file) {
+          console.error('请先上传文件！');
+          return;
+        }
+        console.log(this.formItem);
+        console.log(this.file);
+        const obj = {
+          'file': this.file,
+          'URL': '/projects/resources/',
+          'fileName': this.file.name
+        };
+        try {
+          let result = await upload('cframe/upFile', obj);
+          // console.log(result);
+          this.modal10 = false;
+          this.data.push({
+            name: this.formItem.name,
+            serverDir: result.realpath,
+            localDir: this.formItem.local,
+            version: this.formItem.version
+          })
+        } catch (e) {
+          alert(e.message);
+        }
+      },
+      handleUpload (file) {
+        this.file = file;
+        return false;
       }
     }
   }
@@ -126,5 +194,14 @@
   .btn {
     float: left
     margin-top 10px
+  }
+
+  .form-item {
+    margin-bottom 15px
+  }
+
+  .btns {
+    margin 0
+    text-align center
   }
 </style>
