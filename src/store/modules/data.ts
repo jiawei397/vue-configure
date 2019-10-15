@@ -27,7 +27,7 @@ const actions = {
 };
 
 export default {
-  namespaced: true,
+  // namespaced: true,
   state: {
     data: {},
     currentTab: '',//当前tab标签名称
