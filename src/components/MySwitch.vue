@@ -9,9 +9,15 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+interface ISwitch{
+  name:string
+  caption:string
+  defaultValue:boolean
+}
+
 @Component
 export default class MySwitch extends Vue {
-  @Prop() private props: object;
+  @Prop() private props: ISwitch;
 }
 </script>
 

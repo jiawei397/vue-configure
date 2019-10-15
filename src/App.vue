@@ -24,14 +24,14 @@
     </Tabs>
   </div>
 </template>
-<script lang="ts">
+<script>
   import {types} from "./enum";
   import Basic from './views/system/Basic.vue';
   import Resource from './views/system/Resource.vue';
 
 
   export default {
-    data() {
+    data () {
       const data = [
         {
           name: 'system',
@@ -88,7 +88,7 @@
       Resource,
     },
     methods: {
-      changeCurData(name) {
+      changeCurData (name) {
         let index = this.data.findIndex((item) => {
           return item.name === name;
         });
@@ -96,23 +96,23 @@
           this.changeCurDataByIndex(index);
         }
       },
-      changeCurDataByIndex(index) {
+      changeCurDataByIndex (index) {
         this.curTabData = this.data[index].children;
         this.curTab = this.curTabData.name;
         this.current = this.curTabData[0].name;
         this.$refs.tabs.activeKey = this.current;//激活第1个tab页
       },
-      change(name: string) {
+      change (name) {
         this.$store.commit(types.SET_CURRENT_TAB, name);
       },
-      save() {
+      save () {
         // this[types.SAVE]({name:'jw',val:123});
         // this.$store.commit(types.SAVE, {name:'jw',val:123});
         this.$store.dispatch(types.SAVE);
       },
       // ...mapMutations([types.SAVE])
     },
-    mounted() {
+    mounted () {
       this.changeCurDataByIndex(0);
       this.change(this.current);
     }

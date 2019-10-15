@@ -7,17 +7,23 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+  import {Component, Prop, Vue} from 'vue-property-decorator';
 
-@Component
-export default class MyInput extends Vue {
-  @Prop() private props: object;
-}
+  interface IInput {
+    name: string
+    caption: string
+    defaultValue: any
+  }
+
+  @Component
+  export default class MyInput extends Vue {
+    @Prop() private props: IInput;
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-  .my-form-item{
+  .my-form-item {
     margin-left 20px
     width 550px
   }

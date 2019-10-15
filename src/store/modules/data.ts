@@ -5,6 +5,57 @@ interface ISave {
   val: any
 }
 
+const originData: Array<object> = [
+  {tab: 'others', type: 'title', style: 'title2', caption: '设定'},
+  {// 开启前台调试模式
+    tab: 'others',
+    group: '_system',
+    level: 'top',
+    name: 'debugJs',
+    uinvInterface: 'debugJs',
+    caption: '开启前台调试模式',
+    type: 'bool',
+    defaultValue: true,
+  },
+  {// 是否弹提示框
+    tab: 'others',
+    group: '_system',
+    level: 'top',
+    name: 'isShowAlert',
+    uinvInterface: 'isShowAlert',
+    caption: '是否弹提示框',
+    type: 'bool',
+    defaultValue: false,
+  },
+  {tab: 'others', type: 'title', style: 'title2', caption: '其它'},
+//{tab:"others",   group : "_system", level : "top", name:"isKeepCaptionUnique", uinvInterface:"isKeepCaptionUnique",caption:i18n("标题是否唯一"), type:"bool", defaultValue:false },
+  {//3D换肤
+    tab: 'others',
+    group: '_system',
+    level: 'top',
+    itemkey: '',
+    name: 'skinType',
+    uinvInterface: 'skinType',
+    caption: '换肤',
+    type: 'string',
+    defaultValue: 'default'
+  }
+];
+
+const state = {
+  originData,
+  data: {},
+  currentTab: '',//当前tab标签名称
+  currentData: {}
+};
+
+const getters = {
+  originData: (state: any) => state.originData,
+  currentData: (state: any) => state.currentData,
+  currentTab: (state: any) => state.currentTab
+};
+
+
 const mutations: any = {
   [types.SAVE](state: any, {name, val}: ISave) {
     state.data[name] = val;
@@ -28,11 +79,8 @@ const actions = {
 
 export default {
   // namespaced: true,
-  state: {
-    data: {},
-    currentTab: '',//当前tab标签名称
-    currentData: {}
-  },
+  state,
+  getters,
   mutations,
   actions
-}
+};

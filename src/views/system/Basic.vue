@@ -28,7 +28,7 @@
     </Form>
   </div>
 </template>
-<script lang="ts">
+<script>
   import MyTitle from '@/components/MyTitle.vue';
   import MySwitch from '@/components/MySwitch.vue';
   import MyInput from '@/components/MyInput.vue';
@@ -42,44 +42,9 @@
       MyInput,
     },
     data() {
-      const data = [
-        {tab: 'others', type: 'title', style: 'title2', caption: '设定'},
-        {// 开启前台调试模式
-          tab: 'others',
-          group: '_system',
-          level: 'top',
-          name: 'debugJs',
-          uinvInterface: 'debugJs',
-          caption: '开启前台调试模式',
-          type: 'bool',
-          defaultValue: true,
-        },
-        {// 是否弹提示框
-          tab: 'others',
-          group: '_system',
-          level: 'top',
-          name: 'isShowAlert',
-          uinvInterface: 'isShowAlert',
-          caption: '是否弹提示框',
-          type: 'bool',
-          defaultValue: false,
-        },
-        {tab: 'others', type: 'title', style: 'title2', caption: '其它'},
-//{tab:"others",   group : "_system", level : "top", name:"isKeepCaptionUnique", uinvInterface:"isKeepCaptionUnique",caption:i18n("标题是否唯一"), type:"bool", defaultValue:false },
-        {//3D换肤
-          tab: 'others',
-          group: '_system',
-          level: 'top',
-          itemkey: '',
-          name: 'skinType',
-          uinvInterface: 'skinType',
-          caption: '换肤',
-          type: 'string',
-          defaultValue: 'default'
-        }
-      ];
-      const basicForm: object = {};
-      data.forEach((item: object) => {
+      const data = this.$store.getters.originData;
+      const basicForm = {};
+      data.forEach((item) => {
         if (item.name) {
           basicForm[item.name] = item;
         }
