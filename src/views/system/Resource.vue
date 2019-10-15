@@ -2,18 +2,18 @@
   <div class="resource">
     <Table stripe border :columns="header" :data="data"></Table>
     <div class="btn">
-      <Button size="default" icon="ios-download-outline" type="primary" @click="modal10=true">创建资源</Button>
+      <Button size="default" icon="ios-download-outline" type="primary" @click="showWin=true">创建资源</Button>
     </div>
     <Modal
       title="创建资源"
-      v-model="modal10"
+      v-model="showWin"
       class-name="vertical-center-modal" width="450px" :footer-hide="true">
       <Form :model="formItem" :label-width="100" label-position="left">
         <FormItem label="资源名称" class="form-item">
           <Input v-model="formItem.name"></Input>
         </FormItem>
         <FormItem label="本地目录" class="form-item">
-          <Input v-model="formItem.local"></Input>
+          <Input v-model="formItem.localDir"></Input>
         </FormItem>
         <FormItem label="版本" class="form-item">
           <Input v-model="formItem.version"></Input>
@@ -41,11 +41,11 @@
     name: 'resource',
     data () {
       return {
-        modal10: false,
+        showWin: false,
         file: {},
         formItem: {
           name: '',
-          local: '',
+          localDir: '',
           version: ''
         },
         header: [
@@ -78,14 +78,17 @@
           {
             title: 'Action',
             key: 'action',
-            width: 150,
+            width: 180,
             align: 'center',
             render: (h, params) => {
               return h('div', [
                 h('Button', {
                   props: {
-                    type: 'primary',
-                    size: 'small'
+                    // type: 'primary',
+                    size: 'small',
+                    // ghost: true,
+                    type: 'text',
+                    icon: "md-settings"
                   },
                   style: {
                     marginRight: '5px'
@@ -98,8 +101,10 @@
                 }, '编辑'),
                 h('Button', {
                   props: {
-                    type: 'error',
-                    size: 'small'
+                    // type: 'error',
+                    size: 'small',
+                    type: 'text',
+                    icon: "ios-remove-circle"
                   },
                   on: {
                     click: () => {
@@ -120,11 +125,9 @@
           },
           {
             name: 'Jim Green',
-            age: 24,
             serverDir: 'http://aa.com',
-            localDir: 'c://local',
-            version: 1,
-            address: 'London No. 1 Lake Park'
+            localDir: 'c://localDir',
+            version: 1
           },
           {
             name: 'Joe Black',
@@ -141,16 +144,19 @@
     },
     methods: {
       show (index) {
-        this.$Modal.info({
-          title: 'User Info',
-          content: `Name：${this.data[index].name}<br>Age：${this.data[index].age}<br>Address：${this.data[index].address}`
-        })
+        // this.$Modal.info({
+        //   title: 'User Info',
+        //   content: `Name：${this.data[index].name}<br>Age：${this.data[index].age}<br>Address：${this.data[index].address}`
+        // });
+        this.formItemBak = this.formItem;
+        this.formItem = this.data[index];
+        this.showWin = true;
       },
       remove (index) {
         this.data.splice(index, 1);
       },
       cancel () {
-        this.modal10 = false;
+        this.showWin = false;
       },
       async handleSubmit () {
         if (!this.file) {
@@ -167,11 +173,11 @@
         try {
           let result = await upload('cframe/upFile', obj);
           // console.log(result);
-          this.modal10 = false;
+          this.showWin = false;
           this.data.push({
             name: this.formItem.name,
             serverDir: result.realpath,
-            localDir: this.formItem.local,
+            localDir: this.formItem.localDir,
             version: this.formItem.version
           })
         } catch (e) {
