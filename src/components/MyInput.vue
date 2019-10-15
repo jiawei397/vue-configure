@@ -1,6 +1,6 @@
 <template>
   <FormItem class="form-item my-form-item" :label="props.caption">
-    <i-input :prop="props.name" v-model="props.defaultValue" size="large" clearable="true">
+    <i-input :prop="props.name" v-model="props.defaultValue" size="large" :clearable="true">
     </i-input>
   </FormItem>
 
