@@ -1,6 +1,28 @@
 <template>
   <div class="resource">
-    <Table stripe border :columns="header" :data="data"></Table>
+    <Table :columns="columns" :data="data" stripe border>
+      <template slot-scope="{ row, index }" slot="name">
+        <div>
+          <Icon type="person"></Icon>
+          <strong>{{row.name}}</strong>
+        </div>
+      </template>
+      <template slot-scope="{ row, index }" slot="serverDir">
+        <a :href="row.realPath" target="_blank">{{ row.serverDir }}</a>
+      </template>
+      <template slot-scope="{ row, index }" slot="localDir">
+        <span>{{ row.localDir }}</span>
+      </template>
+      <template slot-scope="{ row, index }" slot="version">
+        <span>{{ row.version }}</span>
+      </template>
+      <template slot-scope="{ row, index }" slot="action">
+        <div style="text-align: center">
+          <Button icon="md-settings" size="small" type="text" @click="show(index)">编辑</Button>
+          <Button icon="ios-remove-circle" size="small" type="text" @click="remove(index)">删除</Button>
+        </div>
+      </template>
+    </Table>
     <div class="btn">
       <Button size="default" icon="ios-download-outline" type="primary" @click="showWin=true">创建资源</Button>
     </div>
@@ -37,6 +59,8 @@
 <script>
   import {upload} from "../../utils/ajax";
 
+  const url = '/projects/resources/';
+
   export default {
     name: 'resource',
     data () {
@@ -48,106 +72,64 @@
           localDir: '',
           version: ''
         },
-        header: [
+        columns: [
           {
             title: '资源名称',
-            key: 'name',
-            render: (h, params) => {
-              return h('div', [
-                h('Icon', {
-                  props: {
-                    type: 'person'
-                  }
-                }),
-                h('strong', params.row.name)
-              ]);
-            }
+            slot: 'name'
           },
           {
             title: '服务器目录',
-            key: 'serverDir'
+            slot: 'serverDir'
           },
           {
             title: '本地目录',
-            key: 'localDir'
+            slot: 'localDir'
           },
           {
             title: '资源版本',
-            key: 'version'
+            slot: 'version'
           },
           {
-            title: 'Action',
-            key: 'action',
+            title: '操作',
+            slot: 'action',
             width: 180,
-            align: 'center',
-            render: (h, params) => {
-              return h('div', [
-                h('Button', {
-                  props: {
-                    // type: 'primary',
-                    size: 'small',
-                    // ghost: true,
-                    type: 'text',
-                    icon: "md-settings"
-                  },
-                  style: {
-                    marginRight: '5px'
-                  },
-                  on: {
-                    click: () => {
-                      this.show(params.index)
-                    }
-                  }
-                }, '编辑'),
-                h('Button', {
-                  props: {
-                    // type: 'error',
-                    size: 'small',
-                    type: 'text',
-                    icon: "ios-remove-circle"
-                  },
-                  on: {
-                    click: () => {
-                      this.remove(params.index)
-                    }
-                  }
-                }, '删除')
-              ]);
-            }
+            // align: 'center'
           }
         ],
         data: [
           {
             name: 'John Brown',
             serverDir: 18,
+            realPath: 'http://www.baidu.com',
             localDir: 18,
             version: 1
           },
           {
             name: 'Jim Green',
             serverDir: 'http://aa.com',
+            realPath: 'http://www.baidu.com',
             localDir: 'c://localDir',
             version: 1
           },
           {
-            name: 'Joe Black',
-            age: 30,
-            address: 'Sydney No. 1 Lake Park'
+            name: 'Jim Green',
+            serverDir: 'http://aa.com',
+            realPath: 'http://www.baidu.com',
+            localDir: 'c://localDir',
+            version: 1
           },
           {
-            name: 'Jon Snow',
-            age: 26,
-            address: 'Ottawa No. 2 Lake Park'
-          }
+            name: 'Jim Green',
+            serverDir: 'http://aa.com',
+            realPath: 'http://www.baidu.com',
+            localDir: 'c://localDir',
+            version: 1
+          },
         ]
       }
     },
     methods: {
       show (index) {
-        // this.$Modal.info({
-        //   title: 'User Info',
-        //   content: `Name：${this.data[index].name}<br>Age：${this.data[index].age}<br>Address：${this.data[index].address}`
-        // });
         this.formItemBak = this.formItem;
         this.formItem = this.data[index];
         this.showWin = true;
@@ -167,7 +149,7 @@
         console.log(this.file);
         const obj = {
           'file': this.file,
-          'URL': '/projects/resources/',
+          'URL': url,
           'fileName': this.file.name
         };
         try {
@@ -176,7 +158,8 @@
           this.showWin = false;
           this.data.push({
             name: this.formItem.name,
-            serverDir: result.realpath,
+            serverDir: `${url}${this.file.name}`,
+            realPath: result.realpath,
             localDir: this.formItem.localDir,
             version: this.formItem.version
           })
@@ -189,7 +172,7 @@
         return false;
       }
     }
-  }
+  };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
@@ -209,5 +192,14 @@
   .btns {
     margin 0
     text-align center
+  }
+
+  a {
+    color #333333
+    cursor pointer
+  }
+
+  a:hover {
+    text-decoration underline
   }
 </style>
