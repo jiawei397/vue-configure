@@ -5,7 +5,7 @@
         <TabPane :label="item.caption" :name="item.name">
         </TabPane>
       </template>
-      <Button @click="save" icon="ios-download-outline" type="primary" slot="extra">保存</Button>
+      <Button @click="save" icon="ios-share" type="default" slot="extra">保存</Button>
     </Tabs>
     <Tabs class="tab" @on-click="change" :name="curTab" ref="tabs">
       <template v-for="item in curTabData">

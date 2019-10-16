@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="btns">
-      <Button class="btn" type="primary" icon="ios-search">上传配置</Button>
-      <Button type="primary" icon="ios-search">下载配置</Button>
+      <Button class="btn" type="default" icon="ios-cloud-upload">上传配置</Button>
+      <Button type="primary" icon="ios-cloud-download">下载配置</Button>
     </div>
     <Form ref="basicForm" :model="basicForm" :rules="basicForm" :label-width="labelWidth" class="config-system"
           label-position="left">
