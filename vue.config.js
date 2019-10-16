@@ -27,7 +27,7 @@ module.exports = {
         proxy,
         // inline: false, // 关闭热更新
     },
-    // productionSourceMap: false,
+    productionSourceMap: false,
     // css: {
     //     loaderOptions: {
     //         // 给 sass-loader 传递选项
