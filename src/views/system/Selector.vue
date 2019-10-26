@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div @contextmenu.prevent="showBtns()" class="selector">
     <List border class="list">
       <ListItem v-for="item in data" :key="item.key">
-        <span @contextmenu.prevent="showBtns">{{item.name}}</span>
+        <span @contextmenu.prevent.stop="showBtns(item)">{{item.name}}</span>
       </ListItem>
     </List>
     <Modal
@@ -20,6 +20,25 @@
   </div>
 </template>
 <script>
+  const btns = [
+    {
+      key: 'createNode',
+      name: '创建节点'
+    }, {
+      key: 'deleteNode',
+      name: '删除节点'
+    }, {
+      key: 'rename',
+      name: '重新命名'
+    }, {
+      key: 'modifyCondition',
+      name: '修改条件'
+    }, {
+      key: 'deleteCondition',
+      name: '删除条件'
+    }
+  ];
+
   export default {
     data () {
       return {
@@ -33,32 +52,20 @@
           key: 'floor',
           name: '楼层'
         }],
-        btns: [
-          {
-            key: 'createNode',
-            name: '创建节点'
-          }, {
-            key: 'deleteNode',
-            name: '删除节点'
-          }, {
-            key: 'rename',
-            name: '重新命名'
-          }, {
-            key: 'modifyCondition',
-            name: '修改条件'
-          }, {
-            key: 'deleteCondition',
-            name: '删除条件'
-          }
-        ],
+        btns: btns,
         isShowBtns: false
       }
     },
     methods: {
-      showBtns () {
+      showBtns (item) {
         this.isShowBtns = true;
+        if (item) {
+          this.btns = btns;
+        } else {
+          this.btns = [btns[0]];
+        }
       },
-      click(item){
+      click (item) {
         console.log(`${item.name}被点击了！`);
       }
     }
@@ -66,8 +73,22 @@
 </script>
 
 <style lang="stylus">
-  .list {
-    margin 0 20px
+  .selector {
+    height 100%
+
+    .list {
+      margin 0 15px
+    }
+
+    span {
+      cursor pointer
+      font-size 14px !important
+      font-weight 600
+    }
+
+    span:hover {
+      color red
+    }
   }
 
   .btns-modal {
@@ -80,9 +101,4 @@
     }
   }
 
-  span {
-    cursor pointer
-    font-size 14px !important
-    font-weight 600
-  }
 </style>
