@@ -1,10 +1,8 @@
 <template>
   <div @contextmenu.prevent="showBtns()" class="selector">
-    <List border class="list">
-      <ListItem v-for="item in data" :key="item.key">
-        <span @contextmenu.prevent.stop="showBtns(item)">{{item.name}}</span>
-      </ListItem>
-    </List>
+    <myList :list="data" @contextmenuFun="showBtns">
+
+    </myList>
     <Modal
       v-model="isShowBtns"
       class-name="btns-modal"
@@ -39,12 +37,21 @@
     }
   ];
 
+  import myList from '../../components/MyList';
+
   export default {
+    components: {
+      myList: myList
+    },
     data () {
       return {
         data: [{
           key: 'campus',
-          name: '园区'
+          name: '园区',
+          children: [{
+            key: 'ahah',
+            name: 'jw'
+          }]
         }, {
           key: 'building',
           name: '建筑'
@@ -52,6 +59,7 @@
           key: 'floor',
           name: '楼层'
         }],
+        sequence: 1,
         btns: btns,
         isShowBtns: false
       }
@@ -67,6 +75,14 @@
       },
       click (item) {
         console.log(`${item.name}被点击了！`);
+        if (item.key === 'createNode') {
+          this.data.push({
+            key: `newCode${this.sequence}`,
+            name: `新节点-${this.sequence}`
+          });
+          this.sequence++;
+          this.isShowBtns = false;
+        }
       }
     }
   }
@@ -75,20 +91,6 @@
 <style lang="stylus">
   .selector {
     height 100%
-
-    .list {
-      margin 0 15px
-    }
-
-    span {
-      cursor pointer
-      font-size 14px !important
-      font-weight 600
-    }
-
-    span:hover {
-      color red
-    }
   }
 
   .btns-modal {
@@ -97,6 +99,15 @@
 
       .ivu-modal-body {
         padding: 0
+
+        span {
+          cursor pointer
+          font-size 14px !important
+        }
+
+        span:hover {
+          color coral
+        }
       }
     }
   }
