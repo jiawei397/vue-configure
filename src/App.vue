@@ -16,6 +16,9 @@
           <template v-else-if="item.name=='resource'">
             <resource></resource>
           </template>
+          <template v-else-if="item.name=='selector'">
+            <selector></selector>
+          </template>
           <template v-else>
             {{item.caption}}
           </template>
@@ -28,6 +31,7 @@
   import {types} from "./enum";
   import Basic from './views/system/Basic.vue';
   import Resource from './views/system/Resource.vue';
+  import Selector from './views/system/Selector.vue';
 
 
   export default {
@@ -86,6 +90,7 @@
     components: {
       Basic,
       Resource,
+      Selector
     },
     methods: {
       changeCurData (name) {
