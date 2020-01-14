@@ -30,7 +30,7 @@
   export default class MyList extends Vue {
     @Prop() private list: IList[];
 
-    contextmenu(item) {
+    contextmenu(item:any) {
       this.$emit('contextmenuFun', item);
     }
   }
