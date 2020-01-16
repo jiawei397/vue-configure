@@ -3,10 +3,17 @@
     <Button type="primary" :name="name" size="large" @click="click">设置</Button>
     <Modal
       class-name="vertical-center-modal"
+      width="400px"
+      ok-text="保存"
+      :title="caption"
+      @on-cancel="cancel"
       v-model="showList">
-      <p>Content of dialog</p>
-      <p>Content of dialog</p>
-      <p>Content of dialog</p>
+      <div>
+        <i-input v-for="item in defaultValue" type="text" :value="item"></i-input>
+      </div>
+      <div>
+        <Button type="primary" @click="add">增加</Button>
+      </div>
     </Modal>
   </FormItem>
 </template>
@@ -17,17 +24,25 @@
     props: {
       name: String,
       caption: String,
-      defaultValue: Array
+      defaultValue: Array,
     },
-    data(){
+    data () {
       return {
-        showList: false
+        showList: false,
+        originList: []
       }
     },
     methods: {
-      click(){
-        console.log('------------');
+      click () {
         this.showList = true;
+        this.originList = [...this.defaultValue];
+      },
+      add () {
+        this.defaultValue.push('');
+      },
+      cancel () {
+        this.defaultValue.length = 0;
+        this.defaultValue.push(...this.originList);
       }
     }
   }
@@ -35,6 +50,10 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="stylus">
-
+<style lang="stylus">
+  .ivu-modal-body {
+    .ivu-input-type-text {
+      padding: 0 5px 10px 5px;
+    }
+  }
 </style>

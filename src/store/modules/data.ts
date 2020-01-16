@@ -90,7 +90,7 @@ const originData: object[] = [
     listType: 'text',
     textValue: '',
     tips: '名称列表',
-    defaultValue: [],
+    defaultValue: ['aa', 'bb'],
   },
 ];
 
