@@ -17,13 +17,13 @@
           <!--</FormItem>-->
           <MySwitch :props="item"></MySwitch>
         </template>
-        <template v-else-if="item.type==='string'">
-          <MyInput :props="item"></MyInput>
+        <template v-else-if="item.type==='string' || item.type==='number' || item.type==='textarea'">
+          <MyInput :name="item.name" :type="item.type" :caption="item.caption" :defaultValue="item.defaultValue"></MyInput>
         </template>
       </ul>
       <!--<FormItem>-->
-        <!--<Button type="primary" @click="submit('basicForm')">Submit</Button>-->
-        <!--<Button style="margin-left: 8px">Cancel</Button>-->
+      <!--<Button type="primary" @click="submit('basicForm')">Submit</Button>-->
+      <!--<Button style="margin-left: 8px">Cancel</Button>-->
       <!--</FormItem>-->
     </Form>
   </div>
@@ -41,7 +41,7 @@
       MySwitch,
       MyInput,
     },
-    data() {
+    data () {
       const data = this.$store.getters.originData;
       const basicForm = {};
       data.forEach((item) => {
@@ -57,24 +57,24 @@
     },
     watch: {
       basicForm: {
-        handler(form, oldVal) {
+        handler (form, oldVal) {
           this.save(form);
         },
         deep: true
       }
     },
     methods: {
-      change(status) {
+      change (status) {
         this.$Message.info('开关状态：' + status);
       },
-      save(form) {
+      save (form) {
         let map = {};
         for (let key in form) {
           map[key] = form[key].defaultValue;
         }
         this.$store.commit(types.SET_CURRENT_DATA, map);
       },
-      submit(name) {
+      submit (name) {
         // console.log(this.$refs[name]);
         console.log(this.basicForm);
         // this.$refs[name].validate((valid) => {
@@ -87,7 +87,7 @@
         // });
       }
     },
-    mounted() {
+    mounted () {
       this.save(this.basicForm);
     }
   };

@@ -39,7 +39,21 @@ const originData: Array<object> = [
     caption: '换肤',
     type: 'string',
     defaultValue: 'default'
-  }
+  },
+  {
+    'name': 'numberTest',
+    'type': 'number',
+    'caption': '数字',
+    'defaultValue': 22,
+    'desc': ''
+  },
+  {
+    'name': 'textareaTest',
+    'type': 'textarea',
+    'caption': '多行文本',
+    'defaultValue': '醉里乾坤大',
+    'desc': ''
+  },
 ];
 
 const state = {
