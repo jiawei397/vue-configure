@@ -26,6 +26,9 @@
         <template v-else-if="item.type==='color'">
           <MyColor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"></MyColor>
         </template>
+        <template v-else-if="item.type==='listEditor'">
+          <ListEditor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"></ListEditor>
+        </template>
       </ul>
       <!--<FormItem>-->
       <!--<Button type="primary" @click="submit('basicForm')">Submit</Button>-->
@@ -40,6 +43,7 @@
   import MyInput from '@/components/MyInput.vue';
   import MySelect from '@/components/MySelect.vue';
   import MyColor from '@/components/MyColor.vue';
+  import ListEditor from '@/components/ListEditor.vue';
   import {types} from "../../enum";
 
   export default {
@@ -49,7 +53,8 @@
       MySwitch,
       MyInput,
       MySelect,
-      MyColor
+      MyColor,
+      ListEditor
     },
     data () {
       const data = this.$store.getters.originData;
@@ -102,7 +107,7 @@
     }
   };
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
   .btns {
     width: 250px;
   }
@@ -113,5 +118,26 @@
 
   .config-system {
     margin-top 20px
+  }
+
+  .my-form-item {
+    margin-left 20px
+    width 550px
+
+    .ivu-form-item-content{
+      input, textarea, .ivu-select{
+        margin-left 120px;
+      }
+    }
+  }
+
+  .vertical-center-modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .ivu-modal{
+      top: 0;
+    }
   }
 </style>

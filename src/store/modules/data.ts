@@ -76,11 +76,21 @@ const originData: object[] = [
     defaultValue: 1,
   },
   {
-    'name': 'colorTest',
-    'type': 'color',
-    'caption': '颜色',
-    'defaultValue': '#2D8CF0',
-    'desc': ''
+    name: 'colorTest',
+    type: 'color',
+    caption: '颜色',
+    defaultValue: '#2D8CF0',
+    desc: '',
+  },
+  {tab: 'others', type: 'title', style: 'title2', caption: '列表'},
+  {
+    name: 'list',
+    caption: '列表（输入框-字符串）',
+    type: 'listEditor',
+    listType: 'text',
+    textValue: '',
+    tips: '名称列表',
+    defaultValue: [],
   },
 ];
 
