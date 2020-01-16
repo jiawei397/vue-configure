@@ -127,7 +127,7 @@
     width 550px
 
     .ivu-form-item-content {
-      input, textarea, .ivu-select {
+      .ivu-input-wrapper, .ivu-select {
         margin-left 120px;
       }
     }
