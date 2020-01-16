@@ -1,8 +1,8 @@
-import {types} from "@/enum";
+import {types} from '@/enum';
 
 interface ISave {
-  name: string
-  val: any
+  name: string;
+  val: any;
 }
 
 const mutations: any = {
@@ -14,25 +14,25 @@ const mutations: any = {
   },
   [types.SET_CURRENT_DATA](state: any, data: object) {
     state.currentData = data;
-  }
+  },
 };
 
 const actions = {
   [types.SAVE]({commit, state}: any) {
     commit(types.SAVE, {
       name: state.currentTab,
-      val: state.currentData
+      val: state.currentData,
     });
-  }
+  },
 };
 
 export default {
   namespaced: true,
   state: {
     data: {},
-    currentTab: '',//当前tab标签名称
-    currentData: {}
+    currentTab: '', // 当前tab标签名称
+    currentData: {},
   },
   mutations,
-  actions
-}
+  actions,
+};

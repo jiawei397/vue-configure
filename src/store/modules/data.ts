@@ -1,11 +1,11 @@
-import {types} from "@/enum";
+import {types} from '@/enum';
 
 interface ISave {
-  name: string
-  val: any
+  name: string;
+  val: any;
 }
 
-const originData: Array<object> = [
+const originData: object[] = [
   {tab: 'others', type: 'title', style: 'title2', caption: '设定'},
   {// 开启前台调试模式
     tab: 'others',
@@ -28,8 +28,8 @@ const originData: Array<object> = [
     defaultValue: false,
   },
   {tab: 'others', type: 'title', style: 'title2', caption: '其它'},
-//{tab:"others",   group : "_system", level : "top", name:"isKeepCaptionUnique", uinvInterface:"isKeepCaptionUnique",caption:i18n("标题是否唯一"), type:"bool", defaultValue:false },
-  {//3D换肤
+// {tab:"others",   group : "_system", level : "top", name:"isKeepCaptionUnique", uinvInterface:"isKeepCaptionUnique",caption:i18n("标题是否唯一"), type:"bool", defaultValue:false },
+  {// 3D换肤
     tab: 'others',
     group: '_system',
     level: 'top',
@@ -38,35 +38,56 @@ const originData: Array<object> = [
     uinvInterface: 'skinType',
     caption: '换肤',
     type: 'string',
-    defaultValue: 'default'
+    defaultValue: 'default',
   },
   {
-    'name': 'numberTest',
-    'type': 'number',
-    'caption': '数字',
-    'defaultValue': 22,
-    'desc': ''
+    name: 'numberTest',
+    type: 'number',
+    caption: '数字',
+    defaultValue: 22,
+    desc: '',
   },
   {
-    'name': 'textareaTest',
-    'type': 'textarea',
-    'caption': '多行文本',
-    'defaultValue': '醉里乾坤大',
-    'desc': ''
+    name: 'textareaTest',
+    type: 'textarea',
+    caption: '多行文本',
+    defaultValue: '醉里乾坤大',
+    desc: '',
+  },
+  {
+    name: 'selectTest',
+    type: 'select',
+    caption: 'select',
+    allowCreate: true,
+    items: [
+      {
+        hideName: 0,
+        showName: '中国',
+      },
+      {
+        hideName: 1,
+        showName: '测试',
+      },
+      {
+        hideName: 2,
+        showName: '测试2',
+      },
+    ],
+    defaultValue: 1,
   },
 ];
 
 const state = {
   originData,
   data: {},
-  currentTab: '',//当前tab标签名称
-  currentData: {}
+  currentTab: '', // 当前tab标签名称
+  currentData: {},
 };
 
 const getters = {
   originData: (state: any) => state.originData,
   currentData: (state: any) => state.currentData,
-  currentTab: (state: any) => state.currentTab
+  currentTab: (state: any) => state.currentTab,
 };
 
 
@@ -79,16 +100,16 @@ const mutations: any = {
   },
   [types.SET_CURRENT_DATA](state: any, data: object) {
     state.currentData = data;
-  }
+  },
 };
 
 const actions = {
   [types.SAVE]({commit, state}: any) {
     commit(types.SAVE, {
       name: state.currentTab,
-      val: state.currentData
+      val: state.currentData,
     });
-  }
+  },
 };
 
 export default {
@@ -96,5 +117,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 };

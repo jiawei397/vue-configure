@@ -20,6 +20,9 @@
         <template v-else-if="item.type==='string' || item.type==='number' || item.type==='textarea'">
           <MyInput :name="item.name" :type="item.type" :caption="item.caption" :defaultValue="item.defaultValue"></MyInput>
         </template>
+        <template v-else-if="item.type==='select'">
+          <MySelect :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue" :items="item.items" :allowCreate="item.allowCreate"></MySelect>
+        </template>
       </ul>
       <!--<FormItem>-->
       <!--<Button type="primary" @click="submit('basicForm')">Submit</Button>-->
@@ -32,6 +35,7 @@
   import MyTitle from '@/components/MyTitle.vue';
   import MySwitch from '@/components/MySwitch.vue';
   import MyInput from '@/components/MyInput.vue';
+  import MySelect from '@/components/MySelect.vue';
   import {types} from "../../enum";
 
   export default {
@@ -40,6 +44,7 @@
       MyTitle,
       MySwitch,
       MyInput,
+      MySelect
     },
     data () {
       const data = this.$store.getters.originData;

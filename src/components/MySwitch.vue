@@ -9,10 +9,10 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-interface ISwitch{
-  name:string
-  caption:string
-  defaultValue:boolean
+interface ISwitch {
+  name: string;
+  caption: string;
+  defaultValue: boolean;
 }
 
 @Component

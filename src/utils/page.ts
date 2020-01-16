@@ -5,7 +5,7 @@ import { post } from './ajax';
 /**
  * 登出
  */
-export function logout () {
+export function logout() {
   return post('user/oauth/logout');
 }
 
