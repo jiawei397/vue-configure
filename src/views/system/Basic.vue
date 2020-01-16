@@ -18,10 +18,12 @@
           <MySwitch :props="item"></MySwitch>
         </template>
         <template v-else-if="item.type==='string' || item.type==='number' || item.type==='textarea'">
-          <MyInput :name="item.name" :type="item.type" :caption="item.caption" :defaultValue="item.defaultValue"></MyInput>
+          <MyInput :name="item.name" :type="item.type==='string'?'text':item.type" :caption="item.caption"
+                   :defaultValue="item.defaultValue"></MyInput>
         </template>
         <template v-else-if="item.type==='select'">
-          <MySelect :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue" :items="item.items" :allowCreate="item.allowCreate"></MySelect>
+          <MySelect :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue" :items="item.items"
+                    :allowCreate="item.allowCreate"></MySelect>
         </template>
         <template v-else-if="item.type==='color'">
           <MyColor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"></MyColor>
@@ -124,19 +126,19 @@
     margin-left 20px
     width 550px
 
-    .ivu-form-item-content{
-      input, textarea, .ivu-select{
+    .ivu-form-item-content {
+      input, textarea, .ivu-select {
         margin-left 120px;
       }
     }
   }
 
-  .vertical-center-modal{
+  .vertical-center-modal {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .ivu-modal{
+    .ivu-modal {
       top: 0;
     }
   }

@@ -8,8 +8,8 @@
       :title="caption"
       @on-cancel="cancel"
       v-model="showList">
-      <div>
-        <i-input v-for="item in defaultValue" type="text" :value="item"></i-input>
+      <div v-for="item in defaultValue">
+        <i-input type="text" :value="item"></i-input>
       </div>
       <div>
         <Button type="primary" @click="add">增加</Button>
