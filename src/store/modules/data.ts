@@ -75,6 +75,13 @@ const originData: object[] = [
     ],
     defaultValue: 1,
   },
+  {
+    'name': 'colorTest',
+    'type': 'color',
+    'caption': '颜色',
+    'defaultValue': '#2D8CF0',
+    'desc': ''
+  },
 ];
 
 const state = {

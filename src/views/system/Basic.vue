@@ -23,6 +23,9 @@
         <template v-else-if="item.type==='select'">
           <MySelect :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue" :items="item.items" :allowCreate="item.allowCreate"></MySelect>
         </template>
+        <template v-else-if="item.type==='color'">
+          <MyColor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"></MyColor>
+        </template>
       </ul>
       <!--<FormItem>-->
       <!--<Button type="primary" @click="submit('basicForm')">Submit</Button>-->
@@ -36,6 +39,7 @@
   import MySwitch from '@/components/MySwitch.vue';
   import MyInput from '@/components/MyInput.vue';
   import MySelect from '@/components/MySelect.vue';
+  import MyColor from '@/components/MyColor.vue';
   import {types} from "../../enum";
 
   export default {
@@ -44,7 +48,8 @@
       MyTitle,
       MySwitch,
       MyInput,
-      MySelect
+      MySelect,
+      MyColor
     },
     data () {
       const data = this.$store.getters.originData;
