@@ -17,75 +17,82 @@
     </Modal>
   </div>
 </template>
-<script>
-  const btns = [
-    {
-      key: 'createNode',
-      name: '创建节点'
-    }, {
-      key: 'deleteNode',
-      name: '删除节点'
-    }, {
-      key: 'rename',
-      name: '重新命名'
-    }, {
-      key: 'modifyCondition',
-      name: '修改条件'
-    }, {
-      key: 'deleteCondition',
-      name: '删除条件'
-    }
-  ];
+<script lang="ts">
+import Vue from 'vue';
+import myList from '../../components/MyList.vue';
 
-  import myList from '../../components/MyList';
+interface IItem {
+  key: string;
+  name: string;
+}
 
-  export default {
-    components: {
-      myList
+const btns: IItem[] = [
+  {
+    key: 'createNode',
+    name: '创建节点'
+  }, {
+    key: 'deleteNode',
+    name: '删除节点'
+  }, {
+    key: 'rename',
+    name: '重新命名'
+  }, {
+    key: 'modifyCondition',
+    name: '修改条件'
+  }, {
+    key: 'deleteCondition',
+    name: '删除条件'
+  }
+];
+
+
+export default Vue.extend({
+  components: {
+    myList
+  },
+  data() {
+    return {
+      data: [{
+        key: 'campus',
+        name: '园区',
+        children: [{
+          key: 'ahah',
+          name: 'jw'
+        }]
+      }, {
+        key: 'building',
+        name: '建筑'
+      }, {
+        key: 'floor',
+        name: '楼层'
+      }],
+      sequence: 1,
+      btns,
+      isShowBtns: false
+    };
+  },
+  methods: {
+    showBtns(item: IItem) {
+      this.isShowBtns = true;
+      if (item) {
+        this.btns = btns;
+      } else {
+        this.btns = [btns[0]];
+      }
     },
-    data() {
-      return {
-        data: [{
-          key: 'campus',
-          name: '园区',
-          children: [{
-            key: 'ahah',
-            name: 'jw'
-          }]
-        }, {
-          key: 'building',
-          name: '建筑'
-        }, {
-          key: 'floor',
-          name: '楼层'
-        }],
-        sequence: 1,
-        btns: btns,
-        isShowBtns: false
-      };
-    },
-    methods: {
-      showBtns(item) {
-        this.isShowBtns = true;
-        if (item) {
-          this.btns = btns;
-        } else {
-          this.btns = [btns[0]];
-        }
-      },
-      click(item) {
-        console.log(`${item.name}被点击了！`);
-        if (item.key === 'createNode') {
-          this.data.push({
-            key: `newCode${this.sequence}`,
-            name: `新节点-${this.sequence}`
-          });
-          this.sequence++;
-          this.isShowBtns = false;
-        }
+    click(item: IItem) {
+      console.log(`${item.name}被点击了！`);
+      if (item.key === 'createNode') {
+        this.data.push({
+          key: `newCode${this.sequence}`,
+          name: `新节点-${this.sequence}`
+        });
+        this.sequence++;
+        this.isShowBtns = false;
       }
     }
-  };
+  }
+});
 </script>
 
 <style lang="stylus">
