@@ -1,9 +1,6 @@
 <template>
-  <FormItem class="form-item my-form-item" :label="props.caption">
     <i-switch class="switch" :prop="props.name" v-model="props.defaultValue" size="large">
     </i-switch>
-  </FormItem>
-
 </template>
 
 <script lang="ts">

@@ -2,7 +2,6 @@
   <div class="config-title config-title2">
     {{caption}}
   </div>
-
 </template>
 
 <script lang="ts">

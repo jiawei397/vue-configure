@@ -1,12 +1,9 @@
 <template>
-  <FormItem class="form-item my-form-item" :label="props.caption">
     <i-input :type="props.type==='string'?'text':props.type" :prop="props.name" v-model.trim="props.defaultValue"
              size="large" :clearable="true" :rows="4">
       <!--@on-blur="blur"-->
       <!--@on-keypress="keypress"-->
     </i-input>
-  </FormItem>
-
 </template>
 
 <script lang="ts">

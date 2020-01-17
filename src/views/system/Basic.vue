@@ -7,24 +7,31 @@
     <Form ref="basicForm" :model="basicForm" :rules="basicForm" :label-width="labelWidth" class="config-system"
           label-position="left">
       <ul v-for="item in data">
-        <template v-if="item.type==='title' || item.type==='Title'">
+        <template v-if="item.type==='title' || item.type==='line'">
           <Title :caption="item.caption"></Title>
         </template>
-        <template v-else-if="item.type==='bool'">
-          <Bool :props="item"></Bool>
-        </template>
-        <template v-else-if="item.type==='string' || item.type==='number' || item.type==='textarea'">
-          <Input :props="item"></Input>
-        </template>
-        <template v-else-if="item.type==='select'">
-          <Select :props="item"></Select>
-        </template>
         <template v-else-if="item.type==='color'">
-          <Color :props="item"></Color>
+          <FormItem class="form-item color-item" :label="item.caption">
+            <Color :props="item"></Color>
+          </FormItem>
         </template>
-        <template v-else-if="item.type==='listEditor'">
-          <ListEditor :props="item"
-                      @save="saveTemp"></ListEditor>
+        <template v-else>
+          <FormItem class="form-item my-form-item" :label="item.caption">
+            <template v-if="item.type==='bool'">
+              <Bool :props="item"></Bool>
+            </template>
+            <template v-else-if="item.type==='string' || item.type==='number' || item.type==='textarea'">
+              <Input :props="item"></Input>
+            </template>
+            <template v-else-if="item.type==='select'">
+              <Select :props="item"></Select>
+            </template>
+
+            <template v-else-if="item.type==='listEditor'">
+              <ListEditor :props="item"
+                          @save="saveTemp"></ListEditor>
+            </template>
+          </FormItem>
         </template>
       </ul>
       <!--<FormItem>-->
@@ -121,6 +128,10 @@ export default Vue.extend({
         margin-left 120px;
       }
     }
+  }
+  .color-item {
+    margin-left 20px
+    width 550px
   }
 
   .vertical-center-modal {

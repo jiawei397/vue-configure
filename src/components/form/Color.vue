@@ -1,9 +1,6 @@
 <template>
-  <FormItem class="form-item color-item" :label="props.caption">
     <ColorPicker :name="props.name" v-model="props.defaultValue" size="large">
     </ColorPicker>
-  </FormItem>
-
 </template>
 
 <script lang="ts">
@@ -23,8 +20,4 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
-  .color-item {
-    margin-left 20px
-    width 550px
-  }
 </style>

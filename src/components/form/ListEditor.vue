@@ -1,5 +1,5 @@
 <template>
-  <FormItem class="form-item my-form-item" :label="props.caption">
+  <div>
     <Button type="primary" :name="props.name" size="large" @click="click">设置</Button>
     <Modal
       class-name="vertical-center-modal"
@@ -18,7 +18,7 @@
         <Button type="primary" @click="add">增加</Button>
       </div>
     </Modal>
-  </FormItem>
+  </div>
 </template>
 
 <script lang="ts">
