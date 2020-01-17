@@ -1,6 +1,6 @@
 <template>
   <FormItem class="form-item my-form-item" :label="caption">
-    <i-input :type="type" :prop="name" :value="defaultValue" size="large" :clearable="true">
+    <i-input :type="type" :prop="name" :value="defaultValue" size="large" :clearable="true" :rows="4">
              <!--@on-blur="blur"-->
              <!--@on-keypress="keypress"-->
     </i-input>
