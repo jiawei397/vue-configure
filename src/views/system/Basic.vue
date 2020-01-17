@@ -18,8 +18,7 @@
           <MySwitch :props="item"></MySwitch>
         </template>
         <template v-else-if="item.type==='string' || item.type==='number' || item.type==='textarea'">
-          <MyInput :name="item.name" :type="item.type==='string'?'text':item.type" :caption="item.caption"
-                   :defaultValue="item.defaultValue"></MyInput>
+          <MyInput :props="item"></MyInput>
         </template>
         <template v-else-if="item.type==='select'">
           <MySelect :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue" :items="item.items"
@@ -29,7 +28,8 @@
           <MyColor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"></MyColor>
         </template>
         <template v-else-if="item.type==='listEditor'">
-          <ListEditor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"></ListEditor>
+          <ListEditor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"
+                      @save="saveTemp"></ListEditor>
         </template>
       </ul>
       <!--<FormItem>-->
@@ -69,7 +69,8 @@
       return {
         data: data,
         labelWidth: 250,
-        basicForm
+        basicForm,
+        complexData: {} //复杂数据存储
       };
     },
     watch: {
@@ -91,17 +92,11 @@
         }
         this.$store.commit(types.SET_CURRENT_DATA, map);
       },
-      submit (name) {
-        // console.log(this.$refs[name]);
-        console.log(this.basicForm);
-        // this.$refs[name].validate((valid) => {
-        //   /* valid的值为true/false 如果全部验证了定义的规则 则valid为true 否则为false 使用此方法 无需二次验证 方便快捷*/
-        //   console.log('-------');
-        //   if (valid) {
-        //     // console.log(this);
-        //     /* 验证之后需要做的事情 */
-        //   }
-        // });
+      /**
+       * 临时保存复杂数据
+       */
+      saveTemp ({name, val}) {
+        this.complexData[name] = val;
       }
     },
     mounted () {

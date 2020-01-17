@@ -31,22 +31,22 @@
       defaultValue: Array,
     },
     data () {
-      const originList = [...this.defaultValue];
+      const currentList = [...this.defaultValue];
       return {
         showList: false,
-        originList,
+        currentList, //保存新弹出页面时的数据。当取消时，需要用它来还原
         items: []
       }
     },
     methods: {
-      getItems (originList) {
-        return originList.map((val) => ({
+      getItems (currentList) {
+        return currentList.map((val) => ({
           id: util.createUUID(),
           val: val
         }));
       },
       init () {
-        this.items = this.getItems(this.originList);
+        this.items = this.getItems(this.currentList);
       },
       click () {
         this.showList = true;
@@ -60,10 +60,14 @@
       },
       cancel () {
         this.items.length = 0;
-        this.items.push(this.getItems(this.originList));
+        this.items.push(this.getItems(this.currentList));
       },
       save () {
-        this.originList = [...this.items.map((item) => item.val)];
+        this.currentList = [...this.items.map((item) => item.val)];
+        this.$emit('save', {
+          name:this.name,
+          val: this.currentList
+        });
       },
       del (id) {
         this.items.some((item, i) => {
