@@ -16,37 +16,28 @@ export interface IConfigData {
   type: string;
   caption: string;
   name?: string;
-  group?: string;
-  itemkey?: string;
   level?: string;
-  uinvInterface?: string;
+  parent?: string;
   defaultValue?: any;
   allowCreate?: boolean;
   desc?: string;
   items?: ISelectItem[];
   listType?: string;
-  style?: string;
   tips?: string;
 }
 
 const originData: IConfigData[] = [
-  {tab: 'others', type: 'title', style: 'title2', caption: '设定'},
+  {tab: 'others', type: 'line',  caption: '设定'},
   {// 开启前台调试模式
     tab: 'others',
-    group: '_system',
-    level: 'top',
     name: 'debugJs',
-    uinvInterface: 'debugJs',
     caption: '开启前台调试模式',
     type: 'bool',
     defaultValue: true
   },
   {// 是否弹提示框
     tab: 'others',
-    group: '_system',
-    level: 'top',
     name: 'isShowAlert',
-    uinvInterface: 'isShowAlert',
     caption: '是否弹提示框',
     type: 'bool',
     defaultValue: false
@@ -54,17 +45,14 @@ const originData: IConfigData[] = [
   {tab: 'others', type: 'title', caption: '其它'},
   {// 3D换肤
     tab: 'others',
-    group: '_system',
-    level: 'top',
-    itemkey: '',
     name: 'skinType',
-    uinvInterface: 'skinType',
     caption: '换肤',
     type: 'string',
     defaultValue: 'default'
   },
   {
     tab: 'others',
+    parent: 'skinType',
     name: 'numberTest',
     type: 'number',
     caption: '数字',
@@ -109,7 +97,7 @@ const originData: IConfigData[] = [
     defaultValue: '#2D8CF0',
     desc: ''
   },
-  {tab: 'others', type: 'title', style: 'title2', caption: '列表'},
+  {tab: 'others', type: 'title', caption: '列表'},
   {
     tab: 'others',
     name: 'list',

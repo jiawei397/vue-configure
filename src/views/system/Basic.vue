@@ -7,8 +7,8 @@
     <Form ref="basicForm" :model="basicForm" :rules="basicForm" :label-width="labelWidth" class="config-system"
           label-position="left">
       <ul v-for="item in data">
-        <template v-if="item.type==='title'">
-          <MyTitle :vStyle="item.style" :caption="item.caption"></MyTitle>
+        <template v-if="item.type==='title' || item.type==='line'">
+          <MyTitle :caption="item.caption"></MyTitle>
         </template>
         <template v-else-if="item.type==='bool'">
           <MySwitch :props="item"></MySwitch>
