@@ -1,12 +1,30 @@
 import {types} from '@/enum';
 import {success} from '@/utils/msg';
 
-interface ISave {
+export interface ISave {
   name: string;
   val: any;
 }
 
-const originData: object[] = [
+export interface IConfigData {
+  tab: string;
+  type: string;
+  caption: string;
+  name?: string;
+  group?: string;
+  itemkey?: string;
+  level?: string;
+  uinvInterface?: string;
+  defaultValue?: any;
+  allowCreate?: boolean;
+  desc?: string;
+  items?: any[];
+  listType?: string;
+  style?: string;
+  tips?: string;
+}
+
+const originData: IConfigData[] = [
   {tab: 'others', type: 'title', style: 'title2', caption: '设定'},
   {// 开启前台调试模式
     tab: 'others',
@@ -29,7 +47,6 @@ const originData: object[] = [
     defaultValue: false
   },
   {tab: 'others', type: 'title', style: 'title2', caption: '其它'},
-// {tab:"others",   group : "_system", level : "top", name:"isKeepCaptionUnique", uinvInterface:"isKeepCaptionUnique",caption:i18n("标题是否唯一"), type:"bool", defaultValue:false },
   {// 3D换肤
     tab: 'others',
     group: '_system',
@@ -42,6 +59,7 @@ const originData: object[] = [
     defaultValue: 'default'
   },
   {
+    tab: 'others',
     name: 'numberTest',
     type: 'number',
     caption: '数字',
@@ -49,6 +67,7 @@ const originData: object[] = [
     desc: ''
   },
   {
+    tab: 'others',
     name: 'textareaTest',
     type: 'textarea',
     caption: '多行文本',
@@ -56,6 +75,7 @@ const originData: object[] = [
     desc: ''
   },
   {
+    tab: 'others',
     name: 'selectTest',
     type: 'select',
     caption: 'select',
@@ -77,6 +97,7 @@ const originData: object[] = [
     defaultValue: 1
   },
   {
+    tab: 'others',
     name: 'colorTest',
     type: 'color',
     caption: '颜色',
@@ -85,11 +106,11 @@ const originData: object[] = [
   },
   {tab: 'others', type: 'title', style: 'title2', caption: '列表'},
   {
+    tab: 'others',
     name: 'list',
     caption: '列表（输入框-字符串）',
     type: 'listEditor',
     listType: 'text',
-    textValue: '',
     tips: '名称列表',
     defaultValue: ['aa', 'bb']
   }

@@ -22,6 +22,7 @@
     "max-line-length": false,
     "forin": false,
     "prefer-const": false,
+    "comment-format": false,
     "member-access": [true , "no-public"],
     "only-arrow-functions": false,
     "no-shadowed-variable": false,

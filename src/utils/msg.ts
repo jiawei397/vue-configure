@@ -28,3 +28,7 @@ export const warn = function(message: string, isNoAlert = false) {
 export const error = function(message: string, isNoAlert = false) {
   snackbar('error', message, isNoAlert);
 };
+
+export const info = function(message: string, isNoAlert = false) {
+  snackbar('info', message, isNoAlert);
+};

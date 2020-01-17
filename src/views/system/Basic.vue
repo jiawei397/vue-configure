@@ -34,71 +34,70 @@
     </Form>
   </div>
 </template>
-<script>
-  import MyTitle from '@/components/MyTitle.vue';
-  import MySwitch from '@/components/MySwitch.vue';
-  import MyInput from '@/components/MyInput.vue';
-  import MySelect from '@/components/MySelect.vue';
-  import MyColor from '@/components/MyColor.vue';
-  import ListEditor from '@/components/ListEditor.vue';
-  import {types} from "../../enum";
+<script lang="ts">
+import Vue from 'vue';
+import MyTitle from '@/components/MyTitle.vue';
+import MySwitch from '@/components/MySwitch.vue';
+import MyInput from '@/components/MyInput.vue';
+import MySelect from '@/components/MySelect.vue';
+import MyColor from '@/components/MyColor.vue';
+import ListEditor from '@/components/ListEditor.vue';
+import {types} from '../../enum';
+import {ISave, IConfigData} from '../../store/modules/data';
 
-  export default {
-    name: 'basic',
-    components: {
-      MyTitle,
-      MySwitch,
-      MyInput,
-      MySelect,
-      MyColor,
-      ListEditor
-    },
-    data() {
-      const data = this.$store.getters.originData;
-      const basicForm = {};
-      data.forEach((item) => {
-        if (item.name) {
-          basicForm[item.name] = item;
-        }
-      });
-      return {
-        data: data,
-        labelWidth: 250,
-        basicForm,
-        complexData: {} //复杂数据存储
-      };
-    },
-    watch: {
-      basicForm: {
-        handler(form, oldVal) {
-          this.save(form);
-        },
-        deep: true
+export default Vue.extend({
+  name: 'basic',
+  components: {
+    MyTitle,
+    MySwitch,
+    MyInput,
+    MySelect,
+    MyColor,
+    ListEditor
+  },
+  data() {
+    const data = this.$store.getters.originData;
+    const basicForm: any = {};
+    data.forEach((item: IConfigData) => {
+      if (item.name) {
+        basicForm[item.name] = item;
       }
-    },
-    methods: {
-      change(status) {
-        this.$Message.info('开关状态：' + status);
+    });
+    return {
+      data,
+      labelWidth: 250,
+      basicForm,
+      complexData: {} as any //复杂数据存储
+    };
+  },
+  watch: {
+    basicForm: {
+      handler(form, oldVal) {
+        this.save(form);
       },
-      save(form) {
-        let map = {...this.complexData};
-        for (let key in form) {
-          map[key] = form[key].defaultValue;
-        }
-        this.$store.commit(types.SET_CURRENT_DATA, map);
-      },
-      /**
-       * 临时保存复杂数据
-       */
-      saveTemp({name, val}) {
-        this.complexData[name] = val;
-        this.save(this.basicForm);
+      deep: true
+    }
+  },
+  methods: {
+    save(form: any) {
+      let map = {...this.complexData};
+      for (let key in form) {
+        map[key] = form[key].defaultValue;
       }
+      this.$store.commit(types.SET_CURRENT_DATA, map);
     },
-    mounted() {
+    /**
+     * 临时保存复杂数据
+     */
+    saveTemp({name, val}: ISave) {
+      this.complexData[name] = val;
       this.save(this.basicForm);
     }
-  };
+  },
+  mounted() {
+    this.save(this.basicForm);
+  }
+});
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   .btns {
