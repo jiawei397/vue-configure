@@ -1,6 +1,6 @@
 <template>
   <FormItem class="form-item my-form-item" :label="props.caption">
-    <i-select :value="props.defaultValue" size="large" clearable :filterable="true" :allow-create="props.allowCreate" placement="top">
+    <i-select v-model="props.defaultValue" size="large" clearable :filterable="true" :allow-create="props.allowCreate" placement="top">
       <Option v-for="item in props.items" :value="item.hideName">{{ item.showName }}</Option>
     </i-Select>
   </FormItem>

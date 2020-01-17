@@ -20,7 +20,7 @@
           <MySelect :props="item"></MySelect>
         </template>
         <template v-else-if="item.type==='color'">
-          <MyColor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"></MyColor>
+          <MyColor :props="item"></MyColor>
         </template>
         <template v-else-if="item.type==='listEditor'">
           <ListEditor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"

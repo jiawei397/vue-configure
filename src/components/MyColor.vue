@@ -1,21 +1,24 @@
 <template>
-  <FormItem class="form-item color-item" :label="caption">
-    <ColorPicker :name="name" v-model="defaultValue" size="large">
+  <FormItem class="form-item color-item" :label="props.caption">
+    <ColorPicker :name="props.name" v-model="props.defaultValue" size="large">
     </ColorPicker>
   </FormItem>
 
 </template>
 
-<script>
-  export default {
-    name: 'MyColor',
-    props: {
-      name: String,
-      caption: String,
-      defaultValue: String
-    }
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
+
+  interface IColor {
+    name: string;
+    caption: string;
+    defaultValue: string;
   }
 
+  @Component
+  export default class MyColor extends Vue {
+    @Prop() private props: IColor;
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
