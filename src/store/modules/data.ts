@@ -51,7 +51,7 @@ const originData: IConfigData[] = [
     type: 'bool',
     defaultValue: false
   },
-  {tab: 'others', type: 'title', style: 'title2', caption: '其它'},
+  {tab: 'others', type: 'title', caption: '其它'},
   {// 3D换肤
     tab: 'others',
     group: '_system',
