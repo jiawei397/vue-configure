@@ -26,7 +26,7 @@ interface IList {
   children: IList[];
 }
 
-@Component({name: 'myList'})
+@Component
 export default class MyList extends Vue {
   @Prop() private list: IList[];
 

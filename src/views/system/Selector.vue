@@ -1,15 +1,15 @@
 <template>
   <div @contextmenu.prevent="showBtns()" class="selector">
-    <myList :list="data" @contextmenuFun="showBtns">
+    <MyList :list="data" @contextmenuFun="showBtns">
 
-    </myList>
+    </MyList>
     <Modal
       v-model="isShowBtns"
       class-name="btns-modal"
       width="110px"
       :closable="false"
       :footer-hide="true">
-      <List border class="btns">
+      <List border>
         <ListItem v-for="item in btns" :key="item.key">
           <span @click="click(item)">{{item.name}}</span>
         </ListItem>
@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import myList from '../../components/form/MyList.vue';
+import MyList from '../../components/MyList.vue';
 
 interface IItem {
   key: string;
@@ -48,7 +48,7 @@ const btns: IItem[] = [
 
 export default Vue.extend({
   components: {
-    myList
+    MyList
   },
   data() {
     return {
