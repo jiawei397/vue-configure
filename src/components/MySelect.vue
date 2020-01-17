@@ -1,26 +1,28 @@
 <template>
-  <FormItem class="form-item my-form-item" :label="caption">
-    <i-select :value="defaultValue" size="large" clearable :filterable="true" :allow-create="allowCreate" placement="top">
-      <Option v-for="item in items" :value="item.hideName">{{ item.showName }}</Option>
+  <FormItem class="form-item my-form-item" :label="props.caption">
+    <i-select :value="props.defaultValue" size="large" clearable :filterable="true" :allow-create="props.allowCreate" placement="top">
+      <Option v-for="item in props.items" :value="item.hideName">{{ item.showName }}</Option>
     </i-Select>
   </FormItem>
 
 </template>
 
-<script>
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
 
-  export default {
-    name: 'MySelect',
-    props: {
-      name: String,
-      caption: String,
-      items: Array,
-      allowCreate: Boolean, //是否支持创建新的
-      defaultValue: [String, Number]
-    },
-    methods: {}
+  interface ISelect {
+    name: string;
+    caption: string;
+    defaultValue: string | number;
+    type: string;
+    items: [any];
+    allowCreate: Boolean, //是否支持创建新的
   }
 
+  @Component
+  export default class MySelect extends Vue {
+    @Prop() private props: ISelect;
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

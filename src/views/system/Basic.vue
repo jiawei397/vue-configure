@@ -11,18 +11,13 @@
           <MyTitle :vStyle="item.style" :caption="item.caption"></MyTitle>
         </template>
         <template v-else-if="item.type==='bool'">
-          <!--<FormItem class="form-item my-form-item" :label="item.caption">-->
-          <!--<i-switch class="switch" :prop="item.name" v-model="item.defaultValue" size="large">-->
-          <!--</i-switch>-->
-          <!--</FormItem>-->
           <MySwitch :props="item"></MySwitch>
         </template>
         <template v-else-if="item.type==='string' || item.type==='number' || item.type==='textarea'">
           <MyInput :props="item"></MyInput>
         </template>
         <template v-else-if="item.type==='select'">
-          <MySelect :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue" :items="item.items"
-                    :allowCreate="item.allowCreate"></MySelect>
+          <MySelect :props="item"></MySelect>
         </template>
         <template v-else-if="item.type==='color'">
           <MyColor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"></MyColor>
