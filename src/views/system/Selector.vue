@@ -41,7 +41,7 @@
 
   export default {
     components: {
-      myList: myList
+      myList
     },
     data() {
       return {
