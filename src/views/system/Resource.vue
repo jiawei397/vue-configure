@@ -56,123 +56,128 @@
     </Modal>
   </div>
 </template>
-<script>
-  import {upload} from "../../utils/ajax";
+<script lang="ts">
+import Vue from 'vue';
+import {upload} from '../../utils/ajax';
 
-  const url = '/projects/resources/';
+interface IItem {
+  name: string;
+  serverDir: string;
+  realPath: string;
+  localDir: string;
+  version: string;
+}
 
-  export default {
-    name: 'resource',
-    data () {
-      return {
-        showWin: false,
-        file: {},
-        formItem: {
-          name: '',
-          localDir: '',
-          version: ''
+const url = '/projects/resources/';
+
+export default Vue.extend({
+  name: 'resource',
+  data() {
+    const data: IItem[] = [{
+      name: 'John Brown',
+      serverDir: 'bb',
+      realPath: 'http://www.baidu.com',
+      localDir: 'aa',
+      version: 'v1'
+    }, {
+      name: 'Jim Green',
+      serverDir: 'http://aa.com',
+      realPath: 'http://www.baidu.com',
+      localDir: 'c://localDir',
+      version: 'v1'
+    }, {
+      name: 'Jim Green',
+      serverDir: 'http://aa.com',
+      realPath: 'http://www.baidu.com',
+      localDir: 'c://localDir',
+      version: 'v1'
+    }, {
+      name: 'Jim Green',
+      serverDir: 'http://aa.com',
+      realPath: 'http://www.baidu.com',
+      localDir: 'c://localDir',
+      version: 'v1'
+    }];
+    return {
+      showWin: false,
+      file: {} as File,
+      formItem: {
+        name: '',
+        localDir: '',
+        version: ''
+      },
+      columns: [
+        {
+          title: '资源名称',
+          slot: 'name'
         },
-        columns: [
-          {
-            title: '资源名称',
-            slot: 'name'
-          },
-          {
-            title: '服务器目录',
-            slot: 'serverDir'
-          },
-          {
-            title: '本地目录',
-            slot: 'localDir'
-          },
-          {
-            title: '资源版本',
-            slot: 'version'
-          },
-          {
-            title: '操作',
-            slot: 'action',
-            width: 180,
-            // align: 'center'
-          }
-        ],
-        data: [
-          {
-            name: 'John Brown',
-            serverDir: 18,
-            realPath: 'http://www.baidu.com',
-            localDir: 18,
-            version: 1
-          },
-          {
-            name: 'Jim Green',
-            serverDir: 'http://aa.com',
-            realPath: 'http://www.baidu.com',
-            localDir: 'c://localDir',
-            version: 1
-          },
-          {
-            name: 'Jim Green',
-            serverDir: 'http://aa.com',
-            realPath: 'http://www.baidu.com',
-            localDir: 'c://localDir',
-            version: 1
-          },
-          {
-            name: 'Jim Green',
-            serverDir: 'http://aa.com',
-            realPath: 'http://www.baidu.com',
-            localDir: 'c://localDir',
-            version: 1
-          },
-        ]
+        {
+          title: '服务器目录',
+          slot: 'serverDir'
+        },
+        {
+          title: '本地目录',
+          slot: 'localDir'
+        },
+        {
+          title: '资源版本',
+          slot: 'version'
+        },
+        {
+          title: '操作',
+          slot: 'action',
+          width: 180
+          // align: 'center'
+        }
+      ],
+      data
+    };
+  },
+  methods: {
+    show(index: number) {
+      // this.formItemBak = this.formItem;
+      this.formItem = this.data[index];
+      this.showWin = true;
+    },
+    remove(index: number) {
+      this.data.splice(index, 1);
+    },
+    cancel() {
+      this.showWin = false;
+    },
+    async handleSubmit() {
+      if (!this.file) {
+        console.error('请先上传文件！');
+        return;
+      }
+      console.log(this.formItem);
+      console.log(this.file);
+      const obj = {
+        'file': this.file,
+        'URL': url,
+        'fileName': this.file.name
+      };
+      try {
+        let result = await upload('cframe/upFile', obj);
+        // console.log(result);
+        this.showWin = false;
+        this.data.push({
+          name: this.formItem.name,
+          serverDir: `${url}${this.file.name}`,
+          realPath: result.realpath,
+          localDir: this.formItem.localDir,
+          version: this.formItem.version
+        });
+      } catch (e) {
+        alert(e.message);
       }
     },
-    methods: {
-      show (index) {
-        this.formItemBak = this.formItem;
-        this.formItem = this.data[index];
-        this.showWin = true;
-      },
-      remove (index) {
-        this.data.splice(index, 1);
-      },
-      cancel () {
-        this.showWin = false;
-      },
-      async handleSubmit () {
-        if (!this.file) {
-          console.error('请先上传文件！');
-          return;
-        }
-        console.log(this.formItem);
-        console.log(this.file);
-        const obj = {
-          'file': this.file,
-          'URL': url,
-          'fileName': this.file.name
-        };
-        try {
-          let result = await upload('cframe/upFile', obj);
-          // console.log(result);
-          this.showWin = false;
-          this.data.push({
-            name: this.formItem.name,
-            serverDir: `${url}${this.file.name}`,
-            realPath: result.realpath,
-            localDir: this.formItem.localDir,
-            version: this.formItem.version
-          })
-        } catch (e) {
-          alert(e.message);
-        }
-      },
-      handleUpload (file) {
-        this.file = file;
-        return false;
-      }
+    handleUpload(file: File) {
+      this.file = file;
+      return false;
     }
-  };
+  }
+});
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
