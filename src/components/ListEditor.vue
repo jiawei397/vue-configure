@@ -1,11 +1,11 @@
 <template>
-  <FormItem class="form-item my-form-item" :label="caption">
-    <Button type="primary" :name="name" size="large" @click="click">设置</Button>
+  <FormItem class="form-item my-form-item" :label="props.caption">
+    <Button type="primary" :name="props.name" size="large" @click="click">设置</Button>
     <Modal
       class-name="vertical-center-modal"
       width="400px"
       ok-text="保存"
-      :title="caption"
+      :title="props.caption"
       @on-cancel="cancel"
       @on-ok="save"
       v-model="showList">
@@ -26,12 +26,13 @@
   export default {
     name: 'ListEditor',
     props: {
-      name: String,
-      caption: String,
-      defaultValue: Array,
+      props: Object
+      // name: String,
+      // caption: String,
+      // defaultValue: Array,
     },
     data () {
-      const currentList = [...this.defaultValue];
+      const currentList = [...this.props.defaultValue];
       return {
         showList: false,
         currentList, //保存新弹出页面时的数据。当取消时，需要用它来还原

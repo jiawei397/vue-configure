@@ -23,7 +23,7 @@
           <MyColor :props="item"></MyColor>
         </template>
         <template v-else-if="item.type==='listEditor'">
-          <ListEditor :name="item.name" :caption="item.caption" :defaultValue="item.defaultValue"
+          <ListEditor :props="item"
                       @save="saveTemp"></ListEditor>
         </template>
       </ul>
