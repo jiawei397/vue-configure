@@ -11,11 +11,16 @@ import 'view-design/dist/styles/iview.css';
 Vue.use(ViewUI);
 
 Vue.config.productionTip = false;
+Vue.prototype.$Message.config({
+  top: 50,
+  duration: 3
+});
 
-(window as any).utils = utils;
+const win: any = window;
+win.utils = utils;
 
-new Vue({
+win.vm = new Vue({
   // router,
   store,
-  render: (h) => h(App),
+  render: (h) => h(App)
 }).$mount('#app');

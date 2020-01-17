@@ -53,7 +53,7 @@
       MyColor,
       ListEditor
     },
-    data () {
+    data() {
       const data = this.$store.getters.originData;
       const basicForm = {};
       data.forEach((item) => {
@@ -70,18 +70,18 @@
     },
     watch: {
       basicForm: {
-        handler (form, oldVal) {
+        handler(form, oldVal) {
           this.save(form);
         },
         deep: true
       }
     },
     methods: {
-      change (status) {
+      change(status) {
         this.$Message.info('开关状态：' + status);
       },
-      save (form) {
-        let map = {};
+      save(form) {
+        let map = {...this.complexData};
         for (let key in form) {
           map[key] = form[key].defaultValue;
         }
@@ -90,11 +90,12 @@
       /**
        * 临时保存复杂数据
        */
-      saveTemp ({name, val}) {
+      saveTemp({name, val}) {
         this.complexData[name] = val;
+        this.save(this.basicForm);
       }
     },
-    mounted () {
+    mounted() {
       this.save(this.basicForm);
     }
   };

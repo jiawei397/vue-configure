@@ -41,7 +41,7 @@ export default class ListEditor extends Vue {
   getItems(currentList) {
     return currentList.map((val) => ({
       id: util.createUUID(),
-      val,
+      val
     }));
   }
   init() {
@@ -54,7 +54,7 @@ export default class ListEditor extends Vue {
   add() {
     this.items.push({
       id: util.createUUID(),
-      val: '',
+      val: ''
     });
   }
   cancel() {
@@ -65,7 +65,7 @@ export default class ListEditor extends Vue {
     this.currentList = [...this.items.map((item) => item.val)];
     this.$emit('save', {
       name: this.props.name,
-      val: this.currentList,
+      val: this.currentList
     });
   }
   del(id) {

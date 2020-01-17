@@ -12,7 +12,7 @@ Q.defer = function() {
   return {
     resolve: _resolve,
     reject: _reject,
-    promise,
+    promise
   };
 };
 Q.reject = Promise.reject;

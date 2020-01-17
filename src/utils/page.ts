@@ -11,7 +11,7 @@ export function logout() {
 
 const urls = {
     login: process.env.VUE_APP_LOGIN_URL,
-    license: process.env.VUE_APP_LICENSE_URL,
+    license: process.env.VUE_APP_LICENSE_URL
 };
 /**
  * 跳转到登陆页

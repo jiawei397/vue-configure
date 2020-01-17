@@ -10,7 +10,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/system',
+      redirect: '/system'
     },
     {
       path: '/system',
@@ -27,9 +27,9 @@ export default new Router({
         // },
         {
           path: 'resource',
-          component: () => import(/* webpackChunkName: "system-resource" */ './views/system/Resource.vue'),
-        },
-      ],
+          component: () => import(/* webpackChunkName: "system-resource" */ './views/system/Resource.vue')
+        }
+      ]
     },
     {
       path: '/func',
@@ -37,7 +37,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "system" */ './views/Func.vue'),
+      component: () => import(/* webpackChunkName: "system" */ './views/Func.vue')
     },
     {
       path: '/exhibition',
@@ -45,7 +45,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "system" */ './views/Exhibition.vue'),
-    },
-  ],
+      component: () => import(/* webpackChunkName: "system" */ './views/Exhibition.vue')
+    }
+  ]
 });

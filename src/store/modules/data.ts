@@ -1,4 +1,5 @@
 import {types} from '@/enum';
+import {success} from '@/utils/msg';
 
 interface ISave {
   name: string;
@@ -15,7 +16,7 @@ const originData: object[] = [
     uinvInterface: 'debugJs',
     caption: '开启前台调试模式',
     type: 'bool',
-    defaultValue: true,
+    defaultValue: true
   },
   {// 是否弹提示框
     tab: 'others',
@@ -25,7 +26,7 @@ const originData: object[] = [
     uinvInterface: 'isShowAlert',
     caption: '是否弹提示框',
     type: 'bool',
-    defaultValue: false,
+    defaultValue: false
   },
   {tab: 'others', type: 'title', style: 'title2', caption: '其它'},
 // {tab:"others",   group : "_system", level : "top", name:"isKeepCaptionUnique", uinvInterface:"isKeepCaptionUnique",caption:i18n("标题是否唯一"), type:"bool", defaultValue:false },
@@ -38,21 +39,21 @@ const originData: object[] = [
     uinvInterface: 'skinType',
     caption: '换肤',
     type: 'string',
-    defaultValue: 'default',
+    defaultValue: 'default'
   },
   {
     name: 'numberTest',
     type: 'number',
     caption: '数字',
     defaultValue: 22,
-    desc: '',
+    desc: ''
   },
   {
     name: 'textareaTest',
     type: 'textarea',
     caption: '多行文本',
     defaultValue: '醉里乾坤大',
-    desc: '',
+    desc: ''
   },
   {
     name: 'selectTest',
@@ -62,25 +63,25 @@ const originData: object[] = [
     items: [
       {
         hideName: 0,
-        showName: '中国',
+        showName: '中国'
       },
       {
         hideName: 1,
-        showName: '测试',
+        showName: '测试'
       },
       {
         hideName: 2,
-        showName: '测试2',
-      },
+        showName: '测试2'
+      }
     ],
-    defaultValue: 1,
+    defaultValue: 1
   },
   {
     name: 'colorTest',
     type: 'color',
     caption: '颜色',
     defaultValue: '#2D8CF0',
-    desc: '',
+    desc: ''
   },
   {tab: 'others', type: 'title', style: 'title2', caption: '列表'},
   {
@@ -90,21 +91,21 @@ const originData: object[] = [
     listType: 'text',
     textValue: '',
     tips: '名称列表',
-    defaultValue: ['aa', 'bb'],
-  },
+    defaultValue: ['aa', 'bb']
+  }
 ];
 
 const state = {
   originData,
   data: {},
   currentTab: '', // 当前tab标签名称
-  currentData: {},
+  currentData: {}
 };
 
 const getters = {
   originData: (state: any) => state.originData,
   currentData: (state: any) => state.currentData,
-  currentTab: (state: any) => state.currentTab,
+  currentTab: (state: any) => state.currentTab
 };
 
 
@@ -117,16 +118,17 @@ const mutations: any = {
   },
   [types.SET_CURRENT_DATA](state: any, data: object) {
     state.currentData = data;
-  },
+  }
 };
 
 const actions = {
   [types.SAVE]({commit, state}: any) {
     commit(types.SAVE, {
       name: state.currentTab,
-      val: state.currentData,
+      val: state.currentData
     });
-  },
+    success('提交成功！');
+  }
 };
 
 export default {
@@ -134,5 +136,5 @@ export default {
   state,
   getters,
   mutations,
-  actions,
+  actions
 };

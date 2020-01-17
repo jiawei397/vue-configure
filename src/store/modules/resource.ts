@@ -14,16 +14,16 @@ const mutations: any = {
   },
   [types.SET_CURRENT_DATA](state: any, data: object) {
     state.currentData = data;
-  },
+  }
 };
 
 const actions = {
   [types.SAVE]({commit, state}: any) {
     commit(types.SAVE, {
       name: state.currentTab,
-      val: state.currentData,
+      val: state.currentData
     });
-  },
+  }
 };
 
 export default {
@@ -31,8 +31,8 @@ export default {
   state: {
     data: {},
     currentTab: '', // 当前tab标签名称
-    currentData: {},
+    currentData: {}
   },
   mutations,
-  actions,
+  actions
 };
