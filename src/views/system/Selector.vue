@@ -43,7 +43,7 @@
     components: {
       myList: myList
     },
-    data () {
+    data() {
       return {
         data: [{
           key: 'campus',
@@ -62,10 +62,10 @@
         sequence: 1,
         btns: btns,
         isShowBtns: false
-      }
+      };
     },
     methods: {
-      showBtns (item) {
+      showBtns(item) {
         this.isShowBtns = true;
         if (item) {
           this.btns = btns;
@@ -73,7 +73,7 @@
           this.btns = [btns[0]];
         }
       },
-      click (item) {
+      click(item) {
         console.log(`${item.name}被点击了！`);
         if (item.key === 'createNode') {
           this.data.push({
@@ -85,7 +85,7 @@
         }
       }
     }
-  }
+  };
 </script>
 
 <style lang="stylus">

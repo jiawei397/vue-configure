@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import {util} from 'dcv-tool';
 
 interface IListEditor {
@@ -31,36 +31,46 @@ interface IListEditor {
   defaultValue: string;
 }
 
+interface IItem {
+  id: string;
+  val: string | number;
+}
+
 @Component
 export default class ListEditor extends Vue {
-  private showList: boolean = false;
-  private currentList = [...this.props.defaultValue];
-  private items = [];
   @Prop() private props: IListEditor;
+  private showList: boolean = false;
+  private currentList: any[] = [...this.props.defaultValue];
+  private items: IItem[] = [];
 
-  getItems(currentList) {
+  getItems(currentList: any[]) {
     return currentList.map((val) => ({
       id: util.createUUID(),
       val
     }));
   }
+
   init() {
     this.items = this.getItems(this.currentList);
   }
+
   click() {
     this.showList = true;
     this.init();
   }
+
   add() {
     this.items.push({
       id: util.createUUID(),
       val: ''
     });
   }
+
   cancel() {
     this.items.length = 0;
-    this.items.push(this.getItems(this.currentList));
+    this.items.push(...this.getItems(this.currentList));
   }
+
   save() {
     this.currentList = [...this.items.map((item) => item.val)];
     this.$emit('save', {
@@ -68,7 +78,8 @@ export default class ListEditor extends Vue {
       val: this.currentList
     });
   }
-  del(id) {
+
+  del(id: string) {
     this.items.some((item, i) => {
       if (item.id === id) {
         this.items.splice(i, 1);

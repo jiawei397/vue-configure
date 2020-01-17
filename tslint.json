@@ -9,6 +9,7 @@
     ]
   },
   "rules": {
+    "space-before-function-paren": ["error", "always"],
     "indent": [true, "spaces", 2],
     "interface-name": false,
     "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
