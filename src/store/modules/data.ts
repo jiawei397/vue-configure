@@ -6,6 +6,11 @@ export interface ISave {
   val: any;
 }
 
+export interface ISelectItem {
+  hideName: string | number;
+  showName: string;
+}
+
 export interface IConfigData {
   tab: string;
   type: string;
@@ -18,7 +23,7 @@ export interface IConfigData {
   defaultValue?: any;
   allowCreate?: boolean;
   desc?: string;
-  items?: any[];
+  items?: ISelectItem[];
   listType?: string;
   style?: string;
   tips?: string;
