@@ -8,21 +8,21 @@
 </template>
 
 <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
-  interface ISelect {
-    name: string;
-    caption: string;
-    defaultValue: string | number;
-    type: string;
-    items: [any];
-    allowCreate: Boolean, //是否支持创建新的
-  }
+interface ISelect {
+  name: string;
+  caption: string;
+  defaultValue: string | number;
+  type: string;
+  items: [any];
+  allowCreate: boolean; // 是否支持创建新的
+}
 
-  @Component
-  export default class MySelect extends Vue {
-    @Prop() private props: ISelect;
-  }
+@Component
+export default class MySelect extends Vue {
+  @Prop() private props: ISelect;
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

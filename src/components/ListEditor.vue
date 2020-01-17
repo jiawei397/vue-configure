@@ -21,66 +21,62 @@
   </FormItem>
 </template>
 
-<script>
-  import {util} from 'dcv-tool';
-  export default {
-    name: 'ListEditor',
-    props: {
-      props: Object
-      // name: String,
-      // caption: String,
-      // defaultValue: Array,
-    },
-    data () {
-      const currentList = [...this.props.defaultValue];
-      return {
-        showList: false,
-        currentList, //保存新弹出页面时的数据。当取消时，需要用它来还原
-        items: []
-      }
-    },
-    methods: {
-      getItems (currentList) {
-        return currentList.map((val) => ({
-          id: util.createUUID(),
-          val: val
-        }));
-      },
-      init () {
-        this.items = this.getItems(this.currentList);
-      },
-      click () {
-        this.showList = true;
-        this.init();
-      },
-      add () {
-        this.items.push({
-          id: util.createUUID(),
-          val: ''
-        });
-      },
-      cancel () {
-        this.items.length = 0;
-        this.items.push(this.getItems(this.currentList));
-      },
-      save () {
-        this.currentList = [...this.items.map((item) => item.val)];
-        this.$emit('save', {
-          name:this.name,
-          val: this.currentList
-        });
-      },
-      del (id) {
-        this.items.some((item, i) => {
-          if (item.id === id) {
-            this.items.splice(i, 1);
-            return true;
-          }
-        });
-      }
-    }
-  }
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import {util} from 'dcv-tool';
 
+interface IListEditor {
+  name: string;
+  caption: string;
+  defaultValue: string;
+}
+
+@Component
+export default class ListEditor extends Vue {
+  private showList: boolean = false;
+  private currentList = [...this.props.defaultValue];
+  private items = [];
+  @Prop() private props: IListEditor;
+
+  getItems(currentList) {
+    return currentList.map((val) => ({
+      id: util.createUUID(),
+      val,
+    }));
+  }
+  init() {
+    this.items = this.getItems(this.currentList);
+  }
+  click() {
+    this.showList = true;
+    this.init();
+  }
+  add() {
+    this.items.push({
+      id: util.createUUID(),
+      val: '',
+    });
+  }
+  cancel() {
+    this.items.length = 0;
+    this.items.push(this.getItems(this.currentList));
+  }
+  save() {
+    this.currentList = [...this.items.map((item) => item.val)];
+    this.$emit('save', {
+      name: this.props.name,
+      val: this.currentList,
+    });
+  }
+  del(id) {
+    this.items.some((item, i) => {
+      if (item.id === id) {
+        this.items.splice(i, 1);
+        return true;
+      }
+    });
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

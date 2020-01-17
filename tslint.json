@@ -17,8 +17,10 @@
     "no-console": false,
     "max-line-length": false,
     "forin": false,
+    "member-access": [true , "no-public"],
     "only-arrow-functions": false,
     "no-shadowed-variable": false,
+    "variable-name": false,
     "quotemark": [true, "single"]
   }
 }
