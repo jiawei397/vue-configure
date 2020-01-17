@@ -16,7 +16,7 @@
   }
 
   @Component
-  export default class MyColor extends Vue {
+  export default class Color extends Vue {
     @Prop() private props: IColor;
   }
 </script>

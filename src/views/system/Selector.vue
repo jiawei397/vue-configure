@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import myList from '../../components/MyList.vue';
+import myList from '../../components/form/MyList.vue';
 
 interface IItem {
   key: string;

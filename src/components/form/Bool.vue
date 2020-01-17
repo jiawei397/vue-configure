@@ -16,7 +16,7 @@ interface ISwitch {
 }
 
 @Component
-export default class MySwitch extends Vue {
+export default class Bool extends Vue {
   @Prop() private props: ISwitch;
 }
 </script>

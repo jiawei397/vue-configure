@@ -20,7 +20,7 @@
   }
 
   @Component
-  export default class MyInput extends Vue {
+  export default class Input extends Vue {
     @Prop() private props: IInput;
   }
 </script>

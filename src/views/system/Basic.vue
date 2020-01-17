@@ -7,20 +7,20 @@
     <Form ref="basicForm" :model="basicForm" :rules="basicForm" :label-width="labelWidth" class="config-system"
           label-position="left">
       <ul v-for="item in data">
-        <template v-if="item.type==='title' || item.type==='line'">
-          <MyTitle :caption="item.caption"></MyTitle>
+        <template v-if="item.type==='title' || item.type==='Title'">
+          <Title :caption="item.caption"></Title>
         </template>
         <template v-else-if="item.type==='bool'">
-          <MySwitch :props="item"></MySwitch>
+          <Bool :props="item"></Bool>
         </template>
         <template v-else-if="item.type==='string' || item.type==='number' || item.type==='textarea'">
-          <MyInput :props="item"></MyInput>
+          <Input :props="item"></Input>
         </template>
         <template v-else-if="item.type==='select'">
-          <MySelect :props="item"></MySelect>
+          <Select :props="item"></Select>
         </template>
         <template v-else-if="item.type==='color'">
-          <MyColor :props="item"></MyColor>
+          <Color :props="item"></Color>
         </template>
         <template v-else-if="item.type==='listEditor'">
           <ListEditor :props="item"
@@ -36,23 +36,23 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import MyTitle from '@/components/MyTitle.vue';
-import MySwitch from '@/components/MySwitch.vue';
-import MyInput from '@/components/MyInput.vue';
-import MySelect from '@/components/MySelect.vue';
-import MyColor from '@/components/MyColor.vue';
-import ListEditor from '@/components/ListEditor.vue';
+import Title from '@/components/form/Title.vue';
+import Bool from '@/components/form/Bool.vue';
+import Input from '@/components/form/Input.vue';
+import Select from '@/components/form/Select.vue';
+import Color from '@/components/form/Color.vue';
+import ListEditor from '@/components/form/ListEditor.vue';
 import {types} from '../../enum';
 import {ISave, IConfigData} from '../../store/modules/data';
 
 export default Vue.extend({
   name: 'basic',
   components: {
-    MyTitle,
-    MySwitch,
-    MyInput,
-    MySelect,
-    MyColor,
+    Title,
+    Bool,
+    Input,
+    Select,
+    Color,
     ListEditor
   },
   data() {

@@ -20,7 +20,7 @@ interface ISelect {
 }
 
 @Component
-export default class MySelect extends Vue {
+export default class Select extends Vue {
   @Prop() private props: ISelect;
 }
 </script>
