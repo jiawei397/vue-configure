@@ -7,9 +7,12 @@
       ok-text="保存"
       :title="caption"
       @on-cancel="cancel"
+      @on-ok="save"
       v-model="showList">
-      <div v-for="item in defaultValue">
-        <i-input type="text" :value="item"></i-input>
+      <div v-for="item in items" :key="item.id">
+        <i-input type="text" v-model="item.val">
+          <Icon type="md-backspace" slot="append" @click="del(item.id)"/>
+        </i-input>
       </div>
       <div>
         <Button type="primary" @click="add">增加</Button>
@@ -19,6 +22,7 @@
 </template>
 
 <script>
+  import {util} from 'dcv-tool';
   export default {
     name: 'ListEditor',
     props: {
@@ -27,22 +31,47 @@
       defaultValue: Array,
     },
     data () {
+      const originList = [...this.defaultValue];
       return {
         showList: false,
-        originList: []
+        originList,
+        items: []
       }
     },
     methods: {
+      getItems (originList) {
+        return originList.map((val) => ({
+          id: util.createUUID(),
+          val: val
+        }));
+      },
+      init () {
+        this.items = this.getItems(this.originList);
+      },
       click () {
         this.showList = true;
-        this.originList = [...this.defaultValue];
+        this.init();
       },
       add () {
-        this.defaultValue.push('');
+        this.items.push({
+          id: util.createUUID(),
+          val: ''
+        });
       },
       cancel () {
-        this.defaultValue.length = 0;
-        this.defaultValue.push(...this.originList);
+        this.items.length = 0;
+        this.items.push(this.getItems(this.originList));
+      },
+      save () {
+        this.originList = [...this.items.map((item) => item.val)];
+      },
+      del (id) {
+        this.items.some((item, i) => {
+          if (item.id === id) {
+            this.items.splice(i, 1);
+            return true;
+          }
+        });
       }
     }
   }
