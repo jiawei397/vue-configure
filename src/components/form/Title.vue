@@ -7,7 +7,7 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 
-@Component()
+@Component
 export default class Title extends Vue {
   // @Prop() private vStyle: string; // style是关键字
   @Prop() private caption: string;
