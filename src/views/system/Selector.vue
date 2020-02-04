@@ -95,7 +95,7 @@
       };
     },
     methods: {
-      showBtns(item: IBtn, dom: HTMLElement) {
+      showBtns(item: IBtn, dom: any) {
         this.isShowBtns = true;
         if (item) {
           this.btns = btns;
@@ -120,7 +120,6 @@
             type: 'inactive',
             dom: this.tempDom
           });
-          this.tempDom = null;
           this.isShowBtns = false;
         }
       }
