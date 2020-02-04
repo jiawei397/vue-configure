@@ -19,48 +19,58 @@
 </template>
 
 <script lang="ts">
-  import {Component, Prop, Vue} from 'vue-property-decorator';
+import {Component, Prop, Vue} from 'vue-property-decorator';
+import {addClass, removeClass} from '../utils/page';
+import {eventEmitter} from '../utils/msg';
 
-  interface IList {
-    key: string;
-    name: string;
-    children: IList[];
+interface IList {
+  key: string;
+  name: string;
+  children: IList[];
+}
+
+eventEmitter.on('myListShowMenu', function ({type, dom}) {
+  if (type === 'active') {
+    addClass(dom, type);
+  } else {
+    removeClass(dom, 'active');
+  }
+});
+
+@Component({name: 'myList'})
+export default class MyList extends Vue {
+  @Prop() private list: IList[];
+  @Prop() private showBtns: (item: any, dom: HTMLElement) => void;
+
+  contextmenu(e: Event, item: any) {
+    // debugger;
+    // console.log(item);
+    const dom = e.target as HTMLElement;
+    // console.log(dom);
+    this.showBtns(item, dom);
+    // this.$emit('contextmenuFun', item);
   }
 
-  @Component({name: 'myList'})
-  export default class MyList extends Vue {
-    @Prop() private list: IList[];
-    @Prop() private showBtns: (item: any) => void;
-
-    contextmenu(e: Event, item: any) {
-      // debugger;
-      // console.log(item);
-      const dom = e.target;
-      // console.log(dom);
-      this.showBtns(item);
-      // this.$emit('contextmenuFun', item);
-    }
-
-    show(e: Event) {
-      console.log(e);
-      const icon = e.target as HTMLElement;
-      const div = (icon.parentNode as HTMLElement).children[1];
-      if (div.children) {
-        icon.classList.remove('ivu-icon-md-arrow-dropup');
-        icon.classList.add('ivu-icon-md-arrow-dropdown');
-        [...div.children].forEach((child: any) => {
-          if (child.style.display === 'none') {
-            child.style.display = 'block';
-          } else {
-            child.style.display = 'none';
-          }
-        });
-      } else {
-        icon.classList.remove('ivu-icon-md-arrow-dropdown');
-        icon.classList.add('ivu-icon-md-arrow-dropup');
-      }
+  show(e: Event) {
+    console.log(e);
+    const icon = e.target as HTMLElement;
+    const div = (icon.parentNode as HTMLElement).children[1];
+    if (div.children) {
+      removeClass(icon, 'ivu-icon-md-arrow-dropup');
+      addClass(icon, 'ivu-icon-md-arrow-dropdown');
+      [...div.children].forEach((child: any) => {
+        if (child.style.display === 'none') {
+          child.style.display = 'block';
+        } else {
+          child.style.display = 'none';
+        }
+      });
+    } else {
+      removeClass(icon, 'ivu-icon-md-arrow-dropdown');
+      addClass(icon, 'ivu-icon-md-arrow-dropup');
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
