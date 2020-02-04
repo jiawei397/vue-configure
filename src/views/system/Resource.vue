@@ -132,7 +132,7 @@ export default Vue.extend({
         // };
         // let result = await upload('cframe/upFile', obj);
         // console.log(result);
-        this[types.ADD]({
+        this.$store.commit(`resource/${types.ADD}`, {
           name: this.formItem.name,
           serverDir: `${url}${this.file.name}`,
           // realPath: result.realpath,
@@ -147,8 +147,8 @@ export default Vue.extend({
     handleUpload(file: File) {
       this.file = file;
       return false;
-    },
-    ...mapMutations('resource', [types.ADD])
+    }
+    // ...mapMutations('resource', [types.ADD])
   }
 });
 </script>
