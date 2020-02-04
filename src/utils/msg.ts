@@ -1,3 +1,5 @@
+import events from 'events';
+
 export const snackbar = function(eventName: string, message: string, isNoAlert: boolean = false) {
   if (isNoAlert) {
     if (eventName in console) {
@@ -32,3 +34,6 @@ export const error = function(message: string, isNoAlert = false) {
 export const info = function(message: string, isNoAlert = false) {
   snackbar('info', message, isNoAlert);
 };
+
+// 创建 eventEmitter 对象
+export const eventEmitter = new events.EventEmitter();
