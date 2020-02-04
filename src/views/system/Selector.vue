@@ -4,7 +4,7 @@
 
     </MyList>
     <Modal
-      v-model="isShowBtns"
+      v-model="isShowMenu"
       class-name="btns-modal"
       width="110px"
       :closable="false"
@@ -90,23 +90,39 @@
         data: datas,
         sequence: 1,
         btns,
-        isShowBtns: false,
-        tempDom: null
+        isShowMenu: false,
+        tempDom: null //记录正激活的节点
       };
+    },
+    watch: {
+      isShowMenu: {
+        handler(val) {
+          if (!this.tempDom) {
+            return;
+          }
+          if (val) {
+            eventEmitter.emit('myListShowMenu', {
+              type: 'active',
+              dom: this.tempDom
+            });
+          } else {
+            eventEmitter.emit('myListShowMenu', {
+              type: 'inactive',
+              dom: this.tempDom
+            });
+          }
+        }
+      }
     },
     methods: {
       showBtns(item: IBtn, dom: any) {
-        this.isShowBtns = true;
+        this.tempDom = dom; //必须在下面之前
+        this.isShowMenu = true;
         if (item) {
           this.btns = btns;
         } else {
           this.btns = [btns[0]];
         }
-        eventEmitter.emit('myListShowMenu', {
-          type: 'active',
-          dom
-        });
-        this.tempDom = dom;
       },
       click(item: IBtn) {
         console.log(`${item.name}被点击了！`);
@@ -116,11 +132,8 @@
             name: `新节点-${this.sequence}`
           });
           this.sequence++;
-          eventEmitter.emit('myListShowMenu', {
-            type: 'inactive',
-            dom: this.tempDom
-          });
-          this.isShowBtns = false;
+          this.isShowMenu = false;
+          this.tempDom = null;
         }
       }
     }
