@@ -1,6 +1,6 @@
 <template>
   <div @contextmenu.prevent="showBtns()" class="selector">
-    <MyList :list="data" @contextmenuFun="showBtns">
+    <MyList :list="data" :showBtns="showBtns">
 
     </MyList>
     <Modal
