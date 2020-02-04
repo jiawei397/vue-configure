@@ -1,5 +1,8 @@
 export const types = {
+  ADD: 'ADD',
+  DELETE: 'DELETE',
   SAVE: 'SAVE',
+  UPLOAD: 'UPLOAD',
   SET_CURRENT_TAB: 'SET_CURRENT_TAB',
   SET_CURRENT_DATA: 'SET_CURRENT_DATA'
 };

@@ -48,20 +48,20 @@ const btns: IBtn[] = [
 interface IItem {
   key: string;
   name: string;
-  condition?: boolean;
-  isOne?: boolean;
+  hasCondition?: boolean; //是否配置了条件
+  isOne?: boolean; //是否第一级
   children?: IItem[];
 }
 
 const datas: IItem[] = [{
   key: 'campus',
   name: '园区',
-  condition: true,
+  hasCondition: true,
   children: [{
     key: 'ahah',
     name: 'jw',
     children: [{
-      condition: true,
+      hasCondition: true,
       key: 'aaee',
       name: 'fgg'
     }]
@@ -69,7 +69,7 @@ const datas: IItem[] = [{
 }, {
   key: 'building',
   name: '建筑',
-  condition: true
+  hasCondition: true
 }, {
   key: 'floor',
   name: '楼层'

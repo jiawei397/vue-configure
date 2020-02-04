@@ -1,38 +1,57 @@
 import {types} from '@/enum';
 
-interface ISave {
+interface IItem {
   name: string;
-  val: any;
+  serverDir: string;
+  realPath: string;
+  localDir: string;
+  version: string;
 }
 
+const originData: IItem[] = [{
+  name: 'John Brown',
+  serverDir: 'bb',
+  realPath: 'http://www.baidu.com',
+  localDir: 'aa',
+  version: 'v1'
+}, {
+  name: 'aa',
+  serverDir: 'http://aa.com',
+  realPath: 'http://www.baidu1.com',
+  localDir: 'c://localDir1',
+  version: 'v12'
+}, {
+  name: 'bb',
+  serverDir: 'http://aa.com',
+  realPath: 'http://www.baidu2.com',
+  localDir: 'c://localDir2',
+  version: 'v13'
+}, {
+  name: 'cc',
+  serverDir: 'http://aa.com',
+  realPath: 'http://www.baidu3.com',
+  localDir: 'c://localDir3',
+  version: 'v14'
+}];
+
 const mutations: any = {
-  [types.SAVE](state: any, {name, val}: ISave) {
-    state.data[name] = val;
-  },
-  [types.SET_CURRENT_TAB](state: any, name: string) {
-    state.currentTab = name;
-  },
-  [types.SET_CURRENT_DATA](state: any, data: object) {
-    state.currentData = data;
+  [types.ADD](state: any, obj: IItem) {
+    state.current = obj;
+    state.data.push(obj);
   }
 };
 
-const actions = {
-  [types.SAVE]({commit, state}: any) {
-    commit(types.SAVE, {
-      name: state.currentTab,
-      val: state.currentData
-    });
-  }
+const getters = {
+  data: (state: any) => state.data,
+  originData: () => originData
 };
 
 export default {
   namespaced: true,
   state: {
-    data: {},
-    currentTab: '', // 当前tab标签名称
-    currentData: {}
+    data: [...originData],
+    current: {}
   },
   mutations,
-  actions
+  getters
 };

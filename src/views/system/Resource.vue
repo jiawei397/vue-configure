@@ -58,46 +58,16 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import {upload} from '../../utils/ajax';
-
-interface IItem {
-  name: string;
-  serverDir: string;
-  realPath: string;
-  localDir: string;
-  version: string;
-}
+// import {upload} from '../../utils/ajax';
+import {types} from '@/enum';
+import {mapMutations} from 'vuex';
 
 const url = '/projects/resources/';
 
 export default Vue.extend({
   name: 'resource',
   data() {
-    const data: IItem[] = [{
-      name: 'John Brown',
-      serverDir: 'bb',
-      realPath: 'http://www.baidu.com',
-      localDir: 'aa',
-      version: 'v1'
-    }, {
-      name: 'Jim Green',
-      serverDir: 'http://aa.com',
-      realPath: 'http://www.baidu.com',
-      localDir: 'c://localDir',
-      version: 'v1'
-    }, {
-      name: 'Jim Green',
-      serverDir: 'http://aa.com',
-      realPath: 'http://www.baidu.com',
-      localDir: 'c://localDir',
-      version: 'v1'
-    }, {
-      name: 'Jim Green',
-      serverDir: 'http://aa.com',
-      realPath: 'http://www.baidu.com',
-      localDir: 'c://localDir',
-      version: 'v1'
-    }];
+    const data = this.$store.getters['resource/originData'];
     return {
       showWin: false,
       file: {} as File,
@@ -152,22 +122,24 @@ export default Vue.extend({
       }
       console.log(this.formItem);
       console.log(this.file);
-      const obj = {
-        'file': this.file,
-        'URL': url,
-        'fileName': this.file.name
-      };
+      // debugger
+      // console.log(this.$store);
       try {
-        let result = await upload('cframe/upFile', obj);
+        // const obj = {
+        //   'file': this.file,
+        //   'URL': url,
+        //   'fileName': this.file.name
+        // };
+        // let result = await upload('cframe/upFile', obj);
         // console.log(result);
-        this.showWin = false;
-        this.data.push({
+        this[types.ADD]({
           name: this.formItem.name,
           serverDir: `${url}${this.file.name}`,
-          realPath: result.realpath,
+          // realPath: result.realpath,
           localDir: this.formItem.localDir,
           version: this.formItem.version
         });
+        this.showWin = false;
       } catch (e) {
         alert(e.message);
       }
@@ -175,7 +147,8 @@ export default Vue.extend({
     handleUpload(file: File) {
       this.file = file;
       return false;
-    }
+    },
+    ...mapMutations('resource', [types.ADD])
   }
 });
 </script>
