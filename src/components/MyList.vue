@@ -19,43 +19,42 @@
 </template>
 
 <script lang="ts">
-  import {Component, Prop, Vue} from "vue-property-decorator";
+import {Component, Prop, Vue} from 'vue-property-decorator';
 
-  interface IList {
-    key: string;
-    name: string;
-    children: IList[];
+interface IList {
+  key: string;
+  name: string;
+  children: IList[];
+}
+
+@Component
+export default class MyList extends Vue {
+  @Prop() private list: IList[];
+
+  contextmenu(item: any) {
+    this.$emit('contextmenuFun', item);
   }
 
-  @Component
-  export default class MyList extends Vue {
-    @Prop() private list: IList[];
-
-    contextmenu(item: any) {
-      this.$emit("contextmenuFun", item);
-    }
-
-    show(e) {
-      // console.log(e);
-      const icon = e.target;
-      const div = icon.parentNode.children[1];
-      if (div.children) {
-        icon.classList.remove("ivu-icon-md-arrow-dropup");
-        icon.classList.add("ivu-icon-md-arrow-dropdown");
-        Array.from(div.children).forEach((child) => {
-          if (child.style.display === "none") {
-            child.style.display = "block";
-          } else {
-            child.style.display = "none";
-          }
-        });
-      } else {
-        icon.classList.remove("ivu-icon-md-arrow-dropdown");
-        icon.classList.add("ivu-icon-md-arrow-dropup");
-      }
-
+  show(e: Event) {
+    console.log(e);
+    const icon = e.target as HTMLElement;
+    const div = (icon.parentNode as HTMLElement).children[1];
+    if (div.children) {
+      icon.classList.remove('ivu-icon-md-arrow-dropup');
+      icon.classList.add('ivu-icon-md-arrow-dropdown');
+      [...div.children].forEach((child: any) => {
+        if (child.style.display === 'none') {
+          child.style.display = 'block';
+        } else {
+          child.style.display = 'none';
+        }
+      });
+    } else {
+      icon.classList.remove('ivu-icon-md-arrow-dropdown');
+      icon.classList.add('ivu-icon-md-arrow-dropup');
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -90,7 +89,7 @@
           margin-left -20px;
         }
 
-        &.one{
+        &.one {
           margin-left 0;
         }
 
